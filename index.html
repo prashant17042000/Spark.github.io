@@ -11,13 +11,14 @@ body{
  text-align:center;
  background:linear-gradient(135deg,#ff4d6d,#ff8fa3,#ffc2d1);
  color:white;
- overflow:hidden;
+ overflow-x:hidden;
+ overflow-y:auto;
 }
 
 .page{
  display:none;
  min-height:100vh;
- padding-top:60px;
+ padding:60px 20px 80px;
  width:100%;
 }
 .active{display:block}
@@ -44,7 +45,7 @@ img{
  box-shadow:0 0 25px white;
 }
 
-/* hearts + flowers */
+/* floating hearts + flowers */
 .heart,.flower{
  position:fixed;
  animation:float 7s linear infinite;
@@ -74,7 +75,6 @@ for(let i=0;i<35;i++){
 }
 </script>
 
-<!-- FIRST PAGE WITH PHOTO -->
 <div id="p1" class="page active">
 <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png">
 <h1>Hey Chhaya ❤️</h1>
