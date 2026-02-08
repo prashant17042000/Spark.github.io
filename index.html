@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Chhaya ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Courier+Prime&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --hot-pink: #ff4d94;
             --soft-pink: #ffb7c5;
-            --baby-pink: #fff0f3;
-            --glass: rgba(255, 255, 255, 0.88);
+            --polaroid-white: #ffffff;
         }
 
         body, html {
@@ -19,33 +18,39 @@
             height: 100%;
             width: 100%;
             font-family: 'Quicksand', sans-serif;
+            background: #fff0f3;
             overflow: hidden;
-            background: #fff0f3; /* Pure Pink Base */
         }
 
-        /* The Hero Background Photo - Pink Tint Reveal */
-        #bg-photo {
+        /* Initial Background (The link you just sent) */
+        #bg-initial {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(255, 183, 197, 0.4), rgba(255, 183, 197, 0.4)), 
-                        url('https://i.postimg.cc/NMGHdkrr/file-0000000033747209800b1a195becd98d.png') no-repeat center center;
+            background: linear-gradient(rgba(255, 240, 243, 0.4), rgba(255, 240, 243, 0.4)),
+                        url('https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png') no-repeat center center;
             background-size: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            z-index: 0;
+            z-index: -2;
         }
 
-        /* Animation Canvas (Petals) */
-        canvas {
+        /* The Final Reveal Background (Chhaya's Photo) */
+        #bg-reveal {
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 2;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 240, 243, 0.2), rgba(255, 240, 243, 0.2)),
+                        url('https://i.postimg.cc/NMGHdkrr/file-0000000033747209800b1a195becd98d.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: -1;
         }
+
+        canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
 
         .container {
             position: relative;
@@ -57,82 +62,83 @@
             padding: 20px;
         }
 
+        /* Polaroid Aesthetic */
         .card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 40px 30px;
-            border-radius: 35px;
-            box-shadow: 0 15px 40px rgba(255, 77, 148, 0.2);
-            max-width: 400px;
+            background: var(--polaroid-white);
+            padding: 20px 20px 50px 20px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 350px;
             width: 100%;
             text-align: center;
-            border: 2px solid #ffdeeb;
-            animation: cardEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #ddd;
+            transform: rotate(-1.5deg);
+            animation: polaroidEntrance 1s ease-out;
         }
 
-        @keyframes cardEntrance {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes polaroidEntrance {
+            from { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            to { transform: scale(1) rotate(-1.5deg); opacity: 1; }
         }
 
-        h1 { font-family: 'Dancing Script', cursive; color: var(--hot-pink); font-size: 2.8rem; margin: 0 0 15px 0; }
-        p { color: #6a4c5b; font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--hot-pink); font-size: 2.2rem; margin: 10px 0; }
+        
+        #typewriter-text {
+            font-family: 'Courier Prime', monospace;
+            color: #333;
+            font-size: 1rem;
+            min-height: 55px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            padding: 5px;
+            border-bottom: 1px dashed #eee;
+        }
 
         input[type="date"], input[type="text"] {
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid var(--soft-pink);
+            padding: 12px;
+            border: 1px solid #ddd;
             width: 85%;
             font-size: 1rem;
-            outline: none;
-            background: #fff9fa;
+            background: #fffafa;
         }
 
         .options-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .option-btn, .action-btn {
             background: #fff;
-            border: 2px solid var(--soft-pink);
-            color: var(--hot-pink);
-            padding: 14px;
-            border-radius: 20px;
-            font-size: 1rem;
+            border: 1.5px solid var(--soft-pink);
+            color: #d63384;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
         }
 
-        .option-btn:hover { background: var(--soft-pink); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 183, 197, 0.4); }
-        
-        .action-btn {
-            background: var(--hot-pink);
-            color: white;
-            border: none;
-            padding: 15px 45px;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.3);
-        }
+        .option-btn:hover { background: #fff5f7; border-color: var(--hot-pink); }
+        .action-btn { background: var(--hot-pink); color: white; border: none; padding: 15px 40px; margin-top: 15px; }
 
-        #no-btn { position: absolute; background: #fdf2f5; border: 1px solid #ffcad6; color: #a38b94; z-index: 5; }
-
+        #no-btn { position: absolute; background: #fff; border: 1px solid #ccc; z-index: 50; }
     </style>
 </head>
 <body>
 
-    <div id="bg-photo"></div>
+    <div id="bg-initial"></div>
+    <div id="bg-reveal"></div>
     <canvas id="petal-canvas"></canvas>
 
-    <div class="container" id="game-container">
-        <div class="card">
-            <h1>Hi Chhaya ❤️</h1>
-            <p>Your favorite color is pink, so I made this blossom for you. Enter our date to begin...</p>
+    <div class="container" id="main-ui">
+        <div class="card" id="lock-screen">
+            <h1>For Chhaya ❤️</h1>
+            <div id="typewriter-text">Before our journey begins, enter the date that changed everything...</div>
             <input type="date" id="date-input">
-            <br><br>
-            <button class="action-btn" onclick="unlock()">Enter My Heart</button>
+            <br>
+            <button class="action-btn" onclick="unlock()">Unlock My Heart</button>
         </div>
     </div>
 
@@ -142,56 +148,76 @@
             { q: "Write a cute nickname for me:", type: "text" },
             { q: "Which habit of mine do you love most?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
             { q: "What is my favorite thing to do with you?", opts: ["Holding hands & walking 🤝", "Getting lost in your eyes 👀"] },
-            { q: "One thing I do that always makes you smile?", opts: ["My daily 'Good Morning' texts ☀️", "The way I tease and annoy you 😜"] },
-            { q: "What do you feel most when you are with me?", opts: ["No fear of being judged 🕊️", "No fear of how I’ll react 😌"] },
+            { q: "One thing I do that always makes you smile?", opts: ["Daily 'Good Morning' texts ☀️", "Teasing & annoying you 😜"] },
+            { q: "What do you feel most when you are with me?", opts: ["No fear of judgment 🕊️", "No fear of reaction 😌"] },
             { q: "What is the hardest thing to understand about me?", opts: ["My silent moods 😶", "My overthinking mind 🧠"] },
             { q: "But despite that, how do we make it work?", opts: ["With your endless patience 🌊", "By always talking it out 🗣️❤️"] },
-            { q: "What can we improve together to strengthen our bond?", opts: ["More quality time ⏳", "Better listening 👂", "Sharing more feelings 💬", "More patience 🙏"] },
-            { q: "My best quality according to you?", opts: ["My honesty & loyalty 🤝", "The way I make you feel safe ❤️"] },
-            { q: "What gives you the most confidence in 'us'?", opts: ["The way we handle differences 🤝", "The fact that we never give up ⚓"] },
+            { q: "What can we improve together to strengthen us?", opts: ["Quality time ⏳", "Better listening 👂", "Sharing feelings 💬", "More patience 🙏"] },
+            { q: "My best quality according to you?", opts: ["Honesty & loyalty 🤝", "Making you feel safe ❤️"] },
+            { q: "What gives you the most confidence in 'us'?", opts: ["Handling differences 🤝", "Never giving up ⚓"] },
             { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
             { q: "Will you be my Valentine forever?", opts: ["Yes! Always ❤️", "Absolutely! 🥰"] },
-            { q: "Relive one moment: Which memory would you choose?", type: "text" },
-            { q: "Are you ready to see what's at the end of this journey?", opts: ["Yes, take me there ❤️"] }
+            { q: "Relive one moment: Which memory would you go back to?", type: "text" },
+            { q: "Are you ready to see what's at the end?", opts: ["Yes, take me there ❤️"] }
         ];
 
         let step = 0;
 
+        function typeWriter(text, i, fnCallback) {
+            const el = document.getElementById("typewriter-text");
+            if (el && i < text.length) {
+                el.innerHTML = text.substring(0, i+1) + '<span style="color:#ff4d94">|</span>';
+                setTimeout(() => typeWriter(text, i + 1, fnCallback), 45);
+            } else if (typeof fnCallback == 'function') {
+                if(el) el.innerHTML = text;
+                fnCallback();
+            }
+        }
+
         function unlock() {
-            if (document.getElementById('date-input').value === '2025-01-15') showNext();
-            else alert("Think of 15 Jan 2025, Chhaya ❤️");
+            if (document.getElementById('date-input').value === '2025-01-15') {
+                showNext();
+            } else { alert("Try again, love... think of 15 Jan 2025! ❤️"); }
         }
 
         function showNext() {
-            const container = document.getElementById('game-container');
-            const bg = document.getElementById('bg-photo');
-            bg.style.opacity = (step / (questions.length - 1));
+            const ui = document.getElementById('main-ui');
+            const revealBg = document.getElementById('bg-reveal');
+            
+            // Fades in the reveal photo as she progresses
+            revealBg.style.opacity = (step / (questions.length - 1));
 
             if (step < questions.length) {
                 const q = questions[step];
-                let html = `<div class="card"><h1>Step ${step + 1}</h1><p>${q.q}</p>`;
-                if (q.type === "text") {
-                    html += `<input type="text" id="ans" placeholder="Write here..."><br><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
-                } else {
-                    html += `<div class="options-grid">`;
-                    q.opts.forEach(o => html += `<button class="option-btn" onclick="step++; showNext()">${o}</button>`);
-                    html += `</div>`;
-                }
-                container.innerHTML = html + `</div>`;
-            } else showProposal();
+                ui.innerHTML = `<div class="card"><h1>Step ${step + 1}</h1><div id="typewriter-text"></div><div id="options-box"></div></div>`;
+                
+                typeWriter(q.q, 0, () => {
+                    const box = document.getElementById('options-box');
+                    if (q.type === "text") {
+                        box.innerHTML = `<input type="text" id="ans" placeholder="Type here..."><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
+                    } else {
+                        let btns = `<div class="options-grid">`;
+                        q.opts.forEach(o => btns += `<button class="option-btn" onclick="step++; showNext()">${o}</button>`);
+                        box.innerHTML = btns + `</div>`;
+                    }
+                });
+            } else {
+                showProposal();
+            }
         }
 
         function showProposal() {
-            document.getElementById('game-container').innerHTML = `
-                <div class="card">
+            document.getElementById('main-ui').innerHTML = `
+                <div class="card" style="transform:rotate(0deg); padding-bottom:40px;">
                     <h1>Chhaya... ❤️</h1>
-                    <p>Every step, every word, every pink petal has led to this...</p>
-                    <h2 style="color:#ff4d94">Will you spend forever with me?</h2>
-                    <div style="position:relative; height:120px; display:flex; justify-content:center; align-items:center;">
+                    <div id="typewriter-text"></div>
+                    <h2 style="color:#ff4d94; margin-top:20px;">Will you spend forever with me?</h2>
+                    <div style="position:relative; height:100px; display:flex; justify-content:center; align-items:center; margin-top:10px;">
                         <button class="action-btn" onclick="final()">YES! ❤️</button>
                         <button id="no-btn" onmouseover="dodge()">No</button>
                     </div>
                 </div>`;
+            typeWriter("I've built this little world for us. Every word is true, and every petal is for you.", 0);
         }
 
         function dodge() {
@@ -201,20 +227,20 @@
         }
 
         function final() {
-            document.getElementById('game-container').innerHTML = `<div class="card"><h1>Forever Starts Now! ❤️</h1><p>I love you more than all the pink flowers in the world.</p></div>`;
-            setInterval(createHeart, 150);
+            document.getElementById('main-ui').innerHTML = `<div class="card"><h1>Forever Starts Now! ❤️</h1><p>I love you more than words can express.</p></div>`;
+            setInterval(createHeart, 200);
         }
 
-        // --- Blossom Animation ---
+        // Blossom & Heart Animations
         const canvas = document.getElementById('petal-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const petals = [];
         class Petal {
             constructor() {
-                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height * -1;
-                this.w = Math.random() * 12 + 8; this.h = Math.random() * 8 + 4;
-                this.speed = Math.random() * 1.5 + 1; this.flip = Math.random();
+                this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height;
+                this.w = Math.random() * 8 + 4; this.h = Math.random() * 6 + 2;
+                this.speed = Math.random() * 1 + 0.5; this.flip = Math.random();
             }
             draw() {
                 ctx.beginPath(); ctx.ellipse(this.x, this.y, this.w, this.h, this.flip, 0, Math.PI * 2);
@@ -222,7 +248,7 @@
             }
             update() { this.y += this.speed; this.flip += 0.01; if (this.y > canvas.height) this.y = -20; }
         }
-        for(let i=0; i<45; i++) petals.push(new Petal());
+        for(let i=0; i<35; i++) petals.push(new Petal());
         function anim() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
             petals.forEach(p => { p.update(); p.draw(); });
@@ -234,7 +260,7 @@
             const h = document.createElement('div');
             h.innerHTML = '💖'; h.style.position = 'fixed';
             h.style.left = Math.random() * 100 + 'vw'; h.style.bottom = '0';
-            h.style.fontSize = '25px'; h.style.transition = 'transform 3s ease-in, opacity 3s';
+            h.style.fontSize = '20px'; h.style.transition = 'transform 3s linear, opacity 3s';
             document.body.appendChild(h);
             setTimeout(() => { h.style.transform = `translateY(-110vh) rotate(${Math.random()*360}deg)`; h.style.opacity = '0'; }, 50);
             setTimeout(() => h.remove(), 3000);
