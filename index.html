@@ -33,6 +33,24 @@
             z-index: -1;
         }
 
+        /* MUSIC ICON */
+        #music-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            cursor: pointer;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--soft-pink);
+        }
+
         canvas { position: fixed; top: 0; left: 0; z-index: 5; pointer-events: none; }
 
         .container {
@@ -113,6 +131,11 @@
     <div id="bg-static"></div>
     <canvas id="petal-canvas"></canvas>
 
+    <div id="music-container" onclick="toggleMusic()">🎵</div>
+    <audio id="bg-music" loop>
+        <source src="YOUR_MP3_URL_HERE" type="audio/mpeg">
+    </audio>
+
     <div class="container" id="main-ui">
         <div class="card" id="lock-screen">
             <h1>Chhaya ❤️</h1>
@@ -143,6 +166,20 @@
         ];
 
         let step = 0;
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            const music = document.getElementById("bg-music");
+            const icon = document.getElementById("music-container");
+            if (isMusicPlaying) {
+                music.pause();
+                icon.innerHTML = "🔇";
+            } else {
+                music.play();
+                icon.innerHTML = "🎵";
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
 
         function typeWriter(text, i, fnCallback) {
             const el = document.getElementById("typewriter-text");
@@ -156,8 +193,12 @@
         }
 
         function unlock() {
-            if (document.getElementById('date-input').value === '2025-01-15') showNext();
-            else alert("Think of 15 Jan 2025 ❤️");
+            if (document.getElementById('date-input').value === '2025-01-15') {
+                // Try playing music on unlock
+                const music = document.getElementById("bg-music");
+                music.play().then(() => { isMusicPlaying = true; }).catch(() => {});
+                showNext();
+            } else { alert("Think of 15 Jan 2025 ❤️"); }
         }
 
         function showNext() {
@@ -242,5 +283,4 @@
         }
     </script>
 </body>
-    </html>
-        
+</html>
