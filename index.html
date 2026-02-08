@@ -10,6 +10,7 @@
             --hot-pink: #ff4d94;
             --soft-pink: #ffb7c5;
             --bg-pink: #fff0f3;
+            --glow: rgba(255, 77, 148, 0.3);
         }
 
         body, html {
@@ -19,13 +20,15 @@
             overflow: hidden;
         }
 
+        /* Pulsing Music Icon */
         #music-btn {
             position: fixed; top: 20px; right: 20px; z-index: 100;
             cursor: pointer; background: white; padding: 12px;
-            border-radius: 50%; box-shadow: 0 4px 15px rgba(255, 77, 148, 0.2);
+            border-radius: 50%; box-shadow: 0 4px 20px var(--glow);
             font-size: 22px; border: 2px solid var(--soft-pink);
-            display: none;
+            display: none; animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
 
@@ -35,16 +38,14 @@
             height: 100vh; padding: 20px;
         }
 
-        /* Romantic Floating Cards */
         .card {
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.98);
             padding: 40px 30px; border-radius: 40px;
             box-shadow: 0 20px 60px rgba(255, 77, 148, 0.2);
             max-width: 380px; width: 100%; text-align: center;
             border: 2px solid white;
         }
 
-        /* Polaroid Memory Style */
         .polaroid {
             background: white; padding: 12px 12px 45px 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
@@ -54,7 +55,6 @@
         .polaroid img { width: 230px; border-radius: 2px; }
 
         h1 { font-family: 'Dancing Script', cursive; color: var(--hot-pink); font-size: 3rem; margin: 0; }
-        p { color: #555; line-height: 1.6; font-size: 1.1rem; }
         
         #typewriter-text {
             font-family: 'Courier Prime', monospace; color: #333;
@@ -62,29 +62,30 @@
             line-height: 1.6; font-weight: 600;
         }
 
-        /* Glowing Capsule Inputs */
+        /* LUXURY CAPSULE INPUTS */
         input {
-            padding: 18px 25px; border-radius: 30px;
+            padding: 18px 25px; border-radius: 35px;
             border: 2px solid var(--soft-pink); width: 85%;
             font-size: 1.1rem; margin-bottom: 15px; outline: none;
             background: #fffafa; color: #d63384;
-            transition: 0.4s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        input:focus { border-color: var(--hot-pink); box-shadow: 0 0 15px rgba(255, 77, 148, 0.3); }
+        input:focus { border-color: var(--hot-pink); transform: scale(1.03); box-shadow: 0 0 20px var(--glow); }
 
         .action-btn {
             background: var(--hot-pink); color: white; border: none;
-            padding: 16px 45px; border-radius: 40px; font-size: 1.2rem;
-            font-weight: 600; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.3);
+            padding: 16px 45px; border-radius: 50px; font-size: 1.2rem;
+            font-weight: 600; cursor: pointer; transition: 0.4s;
+            box-shadow: 0 8px 25px var(--glow);
         }
 
         .opt-btn {
             background: white; color: var(--hot-pink); border: 2px solid var(--soft-pink);
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 30px;
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 35px;
             font-weight: 600; cursor: pointer; transition: 0.3s;
         }
-        .opt-btn:hover { background: var(--hot-pink); color: white; }
+        .opt-btn:hover { background: var(--hot-pink); color: white; transform: scale(1.02); }
     </style>
 </head>
 <body>
@@ -93,7 +94,7 @@
     <div id="music-btn" onclick="toggleMusic()">🎵</div>
     
     <audio id="bg-music" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="main-ui">
@@ -129,32 +130,31 @@
         const music = document.getElementById('bg-music');
 
         function showLock() {
-            // Step 1: Initialize Audio Context on first click
-            music.play().then(() => { music.pause(); }).catch(e => console.log("Audio Init"));
+            // Trigger audio permission
+            music.play().then(() => { music.pause(); }).catch(e => console.log("Ready for unlock"));
             
             document.getElementById('main-ui').innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1.5s ease;">
+                <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s ease;">
                     <div class="polaroid">
                         <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Memory">
                     </div>
                     <div class="card">
                         <h1>Unlock</h1>
-                        <p>Enter our special date (15 Jan 2025)...</p>
+                        <p>Enter our special date...</p>
                         <input type="date" id="date-input">
-                        <br><button class="action-btn" onclick="unlock()">Enter My Heart</button>
+                        <br><button class="action-btn" onclick="unlock()">Open My Heart</button>
                     </div>
                 </div>`;
         }
 
         function unlock() {
             if (document.getElementById('date-input').value === '2025-01-15') {
-                // Step 2: Play audio on second interaction (Unlock)
                 music.play().then(() => {
                     playing = true;
                     document.getElementById('music-btn').style.display = 'flex';
                 });
                 showNext();
-            } else { alert("Try again, love... ❤️"); }
+            } else { alert("Try again, love... 15 Jan 2025 ❤️"); }
         }
 
         function toggleMusic() {
@@ -167,7 +167,7 @@
         function typeWriter(text, i, fnCallback) {
             const el = document.getElementById("typewriter-text");
             if (i < text.length) {
-                el.innerHTML = text.substring(0, i+1) + '<span style="color:var(--hot-pink)">|</span>';
+                el.innerHTML = text.substring(0, i+1) + '<span style="color:var(--hot-pink)">_</span>';
                 setTimeout(() => typeWriter(text, i + 1, fnCallback), 45);
             } else if (fnCallback) {
                 el.innerHTML = text;
@@ -183,7 +183,7 @@
                 typeWriter(q.q, 0, () => {
                     const box = document.getElementById('options-box');
                     if (q.type === "text") {
-                        box.innerHTML = `<input type="text" id="ans" placeholder="Write from your heart..."><br><button class="action-btn" onclick="step++; showNext()">Continue</button>`;
+                        box.innerHTML = `<input type="text" id="ans" placeholder="Write here..."><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
                     } else {
                         let btns = ``;
                         q.opts.forEach(o => btns += `<button class="opt-btn" onclick="step++; showNext()">${o}</button>`);
@@ -207,7 +207,7 @@
         }
 
         function celebrate() {
-            document.getElementById('main-ui').innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the luckiest person alive.</p><br><button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=I+said+YES!+❤️')">Tell me on WhatsApp</button></div>`;
+            document.getElementById('main-ui').innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the luckiest person.</p><br><button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=I+said+YES!+❤️')">WhatsApp Me</button></div>`;
             setInterval(createHeart, 150);
         }
 
