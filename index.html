@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Chhaya ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-pink: #ff85a2;
-            --soft-white: #fffafa;
-            --overlay-bg: rgba(255, 255, 255, 0.7);
+            --hot-pink: #ff4d94;
+            --soft-pink: #ffb7c5;
+            --baby-pink: #fff0f3;
+            --glass: rgba(255, 255, 255, 0.88);
         }
 
         body, html {
@@ -17,35 +18,35 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden;
             font-family: 'Quicksand', sans-serif;
-            background-color: #1a1a1a;
+            overflow: hidden;
+            background: #fff0f3; /* Pure Pink Base */
         }
 
-        /* Background Photo Reveal System */
+        /* The Hero Background Photo - Pink Tint Reveal */
         #bg-photo {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.postimg.cc/NMGHdkrr/file-0000000033747209800b1a195becd98d.png') no-repeat center center;
+            background: linear-gradient(rgba(255, 183, 197, 0.4), rgba(255, 183, 197, 0.4)), 
+                        url('https://i.postimg.cc/NMGHdkrr/file-0000000033747209800b1a195becd98d.png') no-repeat center center;
             background-size: cover;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
-            z-index: -1;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
         }
 
-        /* Animation Canvas */
-        #animation-canvas {
+        /* Animation Canvas (Petals) */
+        canvas {
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 2;
             pointer-events: none;
         }
 
-        /* Layout Container */
         .container {
             position: relative;
             z-index: 10;
@@ -53,238 +54,191 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
             padding: 20px;
         }
 
         .card {
-            background: var(--overlay-bg);
-            backdrop-filter: blur(8px);
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 35px;
+            box-shadow: 0 15px 40px rgba(255, 77, 148, 0.2);
             max-width: 400px;
-            width: 90%;
-            animation: fadeIn 1s ease-out;
+            width: 100%;
+            text-align: center;
+            border: 2px solid #ffdeeb;
+            animation: cardEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } }
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.5rem; margin-bottom: 20px; }
-        p { color: #444; line-height: 1.6; font-size: 1.1rem; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--hot-pink); font-size: 2.8rem; margin: 0 0 15px 0; }
+        p { color: #6a4c5b; font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; }
 
         input[type="date"], input[type="text"] {
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid var(--primary-pink);
-            width: 80%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--soft-pink);
+            width: 85%;
             font-size: 1rem;
-            margin-bottom: 20px;
+            outline: none;
+            background: #fff9fa;
         }
-
-        button {
-            background: var(--primary-pink);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        button:hover { transform: scale(1.05); background: #ff4d7d; }
 
         .options-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
         }
 
-        .option-btn {
-            background: white;
-            border: 2px solid var(--primary-pink);
-            color: #d63384;
-            padding: 10px;
-            border-radius: 15px;
+        .option-btn, .action-btn {
+            background: #fff;
+            border: 2px solid var(--soft-pink);
+            color: var(--hot-pink);
+            padding: 14px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .option-btn:hover { background: var(--primary-pink); color: white; }
+        .option-btn:hover { background: var(--soft-pink); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 183, 197, 0.4); }
+        
+        .action-btn {
+            background: var(--hot-pink);
+            color: white;
+            border: none;
+            padding: 15px 45px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.3);
+        }
 
-        /* Proposal Section */
-        #proposal-btns { position: relative; height: 100px; margin-top: 30px; }
-        #no-btn { position: absolute; left: 50%; transition: 0.2s; }
+        #no-btn { position: absolute; background: #fdf2f5; border: 1px solid #ffcad6; color: #a38b94; z-index: 5; }
 
     </style>
 </head>
 <body>
 
     <div id="bg-photo"></div>
-    <canvas id="animation-canvas"></canvas>
+    <canvas id="petal-canvas"></canvas>
 
-    <div class="container" id="main-content">
-        <div class="card" id="lock-card">
-            <h1>Our Special Date</h1>
-            <p>Enter the date that changed everything for us...</p>
+    <div class="container" id="game-container">
+        <div class="card">
+            <h1>Hi Chhaya ❤️</h1>
+            <p>Your favorite color is pink, so I made this blossom for you. Enter our date to begin...</p>
             <input type="date" id="date-input">
-            <br>
-            <button onclick="checkDate()">Open My Heart</button>
+            <br><br>
+            <button class="action-btn" onclick="unlock()">Enter My Heart</button>
         </div>
     </div>
 
     <script>
         const questions = [
-            { q: "What impression have I created on you over time?", options: ["Someone you can always rely on ⚓", "Someone who understands you best 💡", "A constant source of happiness 😊", "A partner who grows with you 🌱"] },
+            { q: "What impression have I created on you over time?", opts: ["Reliable ⚓", "Understanding 💡", "Happiness 😊", "Growth 🌱"] },
             { q: "Write a cute nickname for me:", type: "text" },
-            { q: "Which habit of mine do you love most?", options: ["The way I care ❤️", "The way I talk 🗣️"] },
-            { q: "What is my favorite thing to do with you?", options: ["Holding hands & walking 🤝", "Getting lost in your eyes 👀"] },
-            { q: "One thing I do that always makes you smile?", options: ["My daily 'Good Morning' texts ☀️", "The way I tease and annoy you 😜"] },
-            { q: "What do you feel most when you are with me?", options: ["No fear of being judged 🕊️", "No fear of how I’ll react 😌"] },
-            { q: "What is the hardest thing to understand about me?", options: ["My silent moods 😶", "My overthinking mind 🧠"] },
-            { q: "But despite that, how do we make it work?", options: ["With your endless patience 🌊", "By always talking it out 🗣️❤️"] },
-            { q: "What can we improve together to strengthen our bond?", options: ["More quality time ⏳", "Better listening 👂", "Sharing more feelings 💬", "More patience with each other 🙏"] },
-            { q: "My best quality according to you?", options: ["My honesty & loyalty 🤝", "The way I make you feel safe ❤️"] },
-            { q: "What gives you the most confidence in 'us'?", options: ["The way we handle differences 🤝", "The fact that we never give up ⚓"] },
-            { q: "Rate our chemistry:", options: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
-            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"] },
-            { q: "Relive one moment: Which memory of us would you choose to go back to?", type: "text" },
-            { q: "Are you ready to see what's at the end of this journey?", options: ["Yes, take me there ❤️"] }
+            { q: "Which habit of mine do you love most?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
+            { q: "What is my favorite thing to do with you?", opts: ["Holding hands & walking 🤝", "Getting lost in your eyes 👀"] },
+            { q: "One thing I do that always makes you smile?", opts: ["My daily 'Good Morning' texts ☀️", "The way I tease and annoy you 😜"] },
+            { q: "What do you feel most when you are with me?", opts: ["No fear of being judged 🕊️", "No fear of how I’ll react 😌"] },
+            { q: "What is the hardest thing to understand about me?", opts: ["My silent moods 😶", "My overthinking mind 🧠"] },
+            { q: "But despite that, how do we make it work?", opts: ["With your endless patience 🌊", "By always talking it out 🗣️❤️"] },
+            { q: "What can we improve together to strengthen our bond?", opts: ["More quality time ⏳", "Better listening 👂", "Sharing more feelings 💬", "More patience 🙏"] },
+            { q: "My best quality according to you?", opts: ["My honesty & loyalty 🤝", "The way I make you feel safe ❤️"] },
+            { q: "What gives you the most confidence in 'us'?", opts: ["The way we handle differences 🤝", "The fact that we never give up ⚓"] },
+            { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
+            { q: "Will you be my Valentine forever?", opts: ["Yes! Always ❤️", "Absolutely! 🥰"] },
+            { q: "Relive one moment: Which memory would you choose?", type: "text" },
+            { q: "Are you ready to see what's at the end of this journey?", opts: ["Yes, take me there ❤️"] }
         ];
 
-        let currentStep = 0;
+        let step = 0;
 
-        function checkDate() {
-            const input = document.getElementById('date-input').value;
-            // 15 Jan 2025
-            if (input === '2025-01-15') {
-                nextQuestion();
-            } else {
-                alert("That's not the right date... try again ❤️");
-            }
+        function unlock() {
+            if (document.getElementById('date-input').value === '2025-01-15') showNext();
+            else alert("Think of 15 Jan 2025, Chhaya ❤️");
         }
 
-        function nextQuestion() {
-            const container = document.getElementById('main-content');
+        function showNext() {
+            const container = document.getElementById('game-container');
             const bg = document.getElementById('bg-photo');
-            
-            // Background Reveal Logic
-            bg.style.opacity = (currentStep / (questions.length - 1));
+            bg.style.opacity = (step / (questions.length - 1));
 
-            if (currentStep < questions.length) {
-                const item = questions[currentStep];
-                let content = `<div class="card"><h1>Question ${currentStep + 1}</h1><p>${item.q}</p>`;
-                
-                if (item.type === "text") {
-                    content += `<input type="text" id="text-ans" placeholder="Type here..."><br><button onclick="saveAndNext()">Continue</button>`;
+            if (step < questions.length) {
+                const q = questions[step];
+                let html = `<div class="card"><h1>Step ${step + 1}</h1><p>${q.q}</p>`;
+                if (q.type === "text") {
+                    html += `<input type="text" id="ans" placeholder="Write here..."><br><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
                 } else {
-                    content += `<div class="options-grid">`;
-                    item.options.forEach(opt => {
-                        content += `<button class="option-btn" onclick="nextQuestion()">${opt}</button>`;
-                    });
-                    content += `</div>`;
+                    html += `<div class="options-grid">`;
+                    q.opts.forEach(o => html += `<button class="option-btn" onclick="step++; showNext()">${o}</button>`);
+                    html += `</div>`;
                 }
-                
-                content += `</div>`;
-                container.innerHTML = content;
-                currentStep++;
-            } else {
-                showProposal();
-            }
+                container.innerHTML = html + `</div>`;
+            } else showProposal();
         }
-
-        function saveAndNext() { nextQuestion(); }
 
         function showProposal() {
-            const container = document.getElementById('main-content');
-            container.innerHTML = `
+            document.getElementById('game-container').innerHTML = `
                 <div class="card">
-                    <h1>Chhaya, my love...</h1>
-                    <p>Through every mood, every silence, and every tease... you are my safe place. I promise to always be yours.</p>
-                    <h2>Will you spend forever with me?</h2>
-                    <div id="proposal-btns">
-                        <button onclick="celebrate()">YES! ❤️</button>
-                        <button id="no-btn" onmouseover="moveNo()">No 😢</button>
+                    <h1>Chhaya... ❤️</h1>
+                    <p>Every step, every word, every pink petal has led to this...</p>
+                    <h2 style="color:#ff4d94">Will you spend forever with me?</h2>
+                    <div style="position:relative; height:120px; display:flex; justify-content:center; align-items:center;">
+                        <button class="action-btn" onclick="final()">YES! ❤️</button>
+                        <button id="no-btn" onmouseover="dodge()">No</button>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
-        function moveNo() {
+        function dodge() {
             const btn = document.getElementById('no-btn');
-            const x = Math.random() * 150 - 75;
-            const y = Math.random() * 150 - 75;
-            btn.style.transform = `translate(${x}px, ${y}px)`;
+            btn.style.left = Math.random() * 80 + '%';
+            btn.style.top = Math.random() * 80 + '%';
         }
 
-        function celebrate() {
-            const container = document.getElementById('main-content');
-            container.innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the happiest person alive. See you soon, my Valentine.</p></div>`;
-            setInterval(createHeart, 100);
+        function final() {
+            document.getElementById('game-container').innerHTML = `<div class="card"><h1>Forever Starts Now! ❤️</h1><p>I love you more than all the pink flowers in the world.</p></div>`;
+            setInterval(createHeart, 150);
         }
 
-        // --- Bestest Animation (Blossom Rain) ---
-        const canvas = document.getElementById('animation-canvas');
+        // --- Blossom Animation ---
+        const canvas = document.getElementById('petal-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const petals = [];
         class Petal {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 5 + 2;
-                this.speed = Math.random() * 2 + 1;
-                this.angle = Math.random() * 360;
-                this.spin = Math.random() * 0.2 - 0.1;
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height * -1;
+                this.w = Math.random() * 12 + 8; this.h = Math.random() * 8 + 4;
+                this.speed = Math.random() * 1.5 + 1; this.flip = Math.random();
             }
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle * Math.PI / 180);
-                ctx.fillStyle = "#ffb7c5";
-                ctx.beginPath();
-                ctx.ellipse(0, 0, this.size, this.size/2, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
+                ctx.beginPath(); ctx.ellipse(this.x, this.y, this.w, this.h, this.flip, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255, 183, 197, 0.7)"; ctx.fill();
             }
-            update() {
-                this.y += this.speed;
-                this.x += Math.sin(this.angle) * 0.5;
-                this.angle += this.spin;
-                if (this.y > canvas.height) this.y = -20;
-            }
+            update() { this.y += this.speed; this.flip += 0.01; if (this.y > canvas.height) this.y = -20; }
         }
-
-        for (let i = 0; i < 50; i++) petals.push(new Petal());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for(let i=0; i<45; i++) petals.push(new Petal());
+        function anim() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
             petals.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(anim);
         }
-        animate();
+        anim();
 
         function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.position = 'fixed';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-            heart.style.transition = '4s';
-            heart.style.zIndex = '1000';
-            document.body.appendChild(heart);
-            setTimeout(() => {
-                heart.style.transform = `translateY(-120vh) rotate(${Math.random() * 360}deg)`;
-                heart.style.opacity = '0';
-            }, 100);
-            setTimeout(() => heart.remove(), 4000);
+            const h = document.createElement('div');
+            h.innerHTML = '💖'; h.style.position = 'fixed';
+            h.style.left = Math.random() * 100 + 'vw'; h.style.bottom = '0';
+            h.style.fontSize = '25px'; h.style.transition = 'transform 3s ease-in, opacity 3s';
+            document.body.appendChild(h);
+            setTimeout(() => { h.style.transform = `translateY(-110vh) rotate(${Math.random()*360}deg)`; h.style.opacity = '0'; }, 50);
+            setTimeout(() => h.remove(), 3000);
         }
     </script>
 </body>
-    </html>
-    
+</html>
