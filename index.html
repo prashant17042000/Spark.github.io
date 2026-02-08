@@ -1,167 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Chhaya ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
---hot-pink:#ff4d94;
---soft-pink:#ffb7c5;
---bg-pink:#fff0f3;
-}
-body,html{
-margin:0;height:100%;font-family:'Quicksand',sans-serif;
-background:var(--bg-pink);overflow:hidden;
-}
-.container{display:flex;justify-content:center;align-items:center;height:100vh;padding:20px}
-.card{
-background:white;padding:40px 30px;border-radius:40px;
-box-shadow:0 20px 60px rgba(255,77,148,0.2);
-max-width:380px;width:100%;text-align:center
-}
-h1{font-family:'Dancing Script';color:var(--hot-pink);font-size:3rem;margin:0}
-input{
-padding:18px;border-radius:35px;border:2px solid var(--soft-pink);
-width:85%;font-size:1.1rem;margin-bottom:15px
-}
-.action-btn{
-background:var(--hot-pink);color:white;border:none;
-padding:16px 45px;border-radius:50px;font-size:1.2rem;cursor:pointer
-}
-.opt-btn{
-background:white;color:var(--hot-pink);
-border:2px solid var(--soft-pink);
-width:100%;padding:15px;margin:10px 0;border-radius:35px;cursor:pointer
-}
-.opt-btn:hover{background:var(--hot-pink);color:white}
-
-#musicBtn{
-position:fixed;top:20px;right:20px;
-background:white;border-radius:50%;padding:12px;
-font-size:22px;cursor:pointer;display:none;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Chhaya ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hot-pink: #ff4d94;
+            --soft-pink: #ffb7c5;
+            --bg-pink: #fff0f3;
+        }
+        body, html {
+            margin: 0; height: 100%; font-family: 'Quicksand', sans-serif;
+            background: var(--bg-pink); overflow: hidden;
+        }
+        .container { display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px }
+        .card {
+            background: white; padding: 40px 30px; border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(255, 77, 148, 0.2);
+            max-width: 380px; width: 100%; text-align: center;
+        }
+        h1 { font-family: 'Dancing Script'; color: var(--hot-pink); font-size: 3rem; margin: 0 }
+        input {
+            padding: 18px; border-radius: 35px; border: 2px solid var(--soft-pink);
+            width: 85%; font-size: 1.1rem; margin-bottom: 15px; outline: none;
+            background: #fffafa; transition: 0.3s;
+        }
+        input:focus { border-color: var(--hot-pink); box-shadow: 0 0 10px rgba(255, 77, 148, 0.2); }
+        .action-btn {
+            background: var(--hot-pink); color: white; border: none;
+            padding: 16px 45px; border-radius: 50px; font-size: 1.2rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 148, 0.3);
+        }
+        .opt-btn {
+            background: white; color: var(--hot-pink); border: 2px solid var(--soft-pink);
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 35px; cursor: pointer;
+            font-weight: 600; transition: 0.3s;
+        }
+        .opt-btn:hover { background: var(--hot-pink); color: white; }
+        #musicBtn {
+            position: fixed; top: 20px; right: 20px;
+            background: white; border-radius: 50%; padding: 12px;
+            font-size: 22px; cursor: pointer; display: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); z-index: 1000;
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="musicBtn" onclick="toggleMusic()">🎵</div>
+    <div id="musicBtn" onclick="toggleMusic()">🎵</div>
 
-<audio id="bgMusic" loop>
-<source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
 
-<div class="container" id="main-ui">
-<div class="card">
-<h1>Hi Chhaya ❤️</h1>
-<p>I made something special for you.</p>
-<br>
-<button class="action-btn" onclick="showLock()">Open ✨</button>
-</div>
-</div>
+    <div class="container" id="main-ui">
+        <div class="card">
+            <h1>Hi Chhaya ❤️</h1>
+            <p>I made something special for you.</p>
+            <br>
+            <button class="action-btn" onclick="showLock()">Open ✨</button>
+        </div>
+    </div>
 
-<script>
+    <script>
+        const music = document.getElementById("bgMusic");
+        const musicBtn = document.getElementById("musicBtn");
+        let playing = false;
 
-const music=document.getElementById("bgMusic");
-let playing=false;
+        function toggleMusic() {
+            if (playing) { music.pause(); musicBtn.innerHTML = "🔇"; }
+            else { music.play(); musicBtn.innerHTML = "🎵"; }
+            playing = !playing;
+        }
 
-function toggleMusic(){
-if(playing){music.pause();musicBtn.innerHTML="🔇";}
-else{music.play();musicBtn.innerHTML="🎵";}
-playing=!playing;
-}
+        const questions = [
+            { q: "What impression have I created on you?", opts: ["Mature 🌿", "Understanding 💡", "Emotional ❤️", "Smart 🧠"] },
+            { q: "Write a cute nickname for me:", type: "text" },
+            { q: "Which habit of mine do you love?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
+            { q: "Favorite thing to do with me?", opts: ["Holding hands 🤝", "Looking in eyes 👀"] },
+            { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite ♾️"] },
+            { q: "Relive one moment: Which memory would you go back to?", type: "text" },
+            { q: "Will you be my Valentine forever?", opts: ["Yes ❤️", "Absolutely 🥰"] }
+        ];
 
-const questions=[
-{q:"What impression have I created on you?",opts:["Mature 🌿","Understanding 💡","Emotional ❤️","Smart 🧠"]},
-{q:"Write a cute nickname for me:",type:"text"},
-{q:"Which habit of mine do you love?",opts:["The way I care ❤️","The way I talk 🗣️"]},
-{q:"Favorite thing to do with me?",opts:["Holding hands 🤝","Looking in eyes 👀"]},
-{q:"Rate our chemistry:",opts:["8 🔥","9 🔥","10 🔥","Infinite ♾️"]},
-{q:"Will you be my Valentine forever?",opts:["Yes ❤️","Absolutely 🥰"]}
-];
+        let step = 0;
+        let userAnswers = [];
 
-let step=0;
-let userAnswers=[];
+        function showLock() {
+            music.play().then(() => music.pause()).catch(e => console.log("Ready"));
+            document.getElementById('main-ui').innerHTML = `
+                <div class="card">
+                    <h1>Unlock ❤️</h1>
+                    <p>Enter our special date (15 Jan 2025)</p>
+                    <input type="date" id="date-input">
+                    <br><button class="action-btn" onclick="unlock()">Unlock</button>
+                </div>`;
+        }
 
-function showLock(){
-document.getElementById('main-ui').innerHTML=`
-<div class="card">
-<h1>Unlock ❤️</h1>
-<p>Enter date (15 Jan 2025)</p>
-<input type="date" id="date-input">
-<br><button class="action-btn" onclick="unlock()">Unlock</button>
-</div>`;
-}
+        function unlock() {
+            if (document.getElementById('date-input').value === "2025-01-15") {
+                music.play();
+                playing = true;
+                musicBtn.style.display = "block";
+                showNext();
+            } else { alert("Try again, love... ❤️"); }
+        }
 
-function unlock(){
-if(document.getElementById('date-input').value==="2025-01-15"){
-music.play();
-playing=true;
-musicBtn.style.display="block";
-showNext();
-}else alert("Try again ❤️");
-}
+        function validateAndSave() {
+            const inputField = document.getElementById('ans_input');
+            const val = inputField.value.trim();
+            
+            if (val === "") {
+                alert("Please write something for me, Chhaya... ❤️");
+                return;
+            }
+            
+            saveAndNext(val);
+        }
 
-function saveAndNext(ans){
-if(!ans) ans="No answer";
-userAnswers.push({q:questions[step].q,a:ans});
-step++;showNext();
-}
+        function saveAndNext(ans) {
+            userAnswers.push({ q: questions[step].q, a: ans });
+            step++;
+            showNext();
+        }
 
-function showNext(){
-const ui=document.getElementById('main-ui');
-if(step<questions.length){
-const q=questions[step];
-ui.innerHTML=`<div class="card"><h1>Question ${step+1}</h1><div id="box"></div></div>`;
-const box=document.getElementById("box");
+        function showNext() {
+            const ui = document.getElementById('main-ui');
+            if (step < questions.length) {
+                const q = questions[step];
+                ui.innerHTML = `<div class="card"><h1>Step ${step + 1}</h1><p style="color:#666">${q.q}</p><div id="box"></div></div>`;
+                const box = document.getElementById("box");
 
-if(q.type==="text"){
-box.innerHTML=`<input id="ans"><br>
-<button class="action-btn" onclick="saveAndNext(document.getElementById('ans').value)">Next</button>`;
-}else{
-let btns="";
-q.opts.forEach(o=>btns+=`<button class="opt-btn" onclick="saveAndNext('${o}')">${o}</button>`);
-box.innerHTML=btns;
-}
-}else proposal();
-}
+                if (q.type === "text") {
+                    box.innerHTML = `
+                        <input type="text" id="ans_input" placeholder="Type here...">
+                        <br>
+                        <button class="action-btn" onclick="validateAndSave()">Next</button>`;
+                } else {
+                    let btns = "";
+                    q.opts.forEach(o => {
+                        btns += `<button class="opt-btn" onclick="saveAndNext('${o}')">${o}</button>`;
+                    });
+                    box.innerHTML = btns;
+                }
+            } else { 
+                proposal(); 
+            }
+        }
 
-function proposal(){
-document.getElementById('main-ui').innerHTML=`
-<div class="card">
-<h1>Will you stay mine forever? ❤️</h1>
-<br><button class="action-btn" onclick="celebrate()">YES ❤️</button>
-</div>`;
-}
+        function proposal() {
+            document.getElementById('main-ui').innerHTML = `
+                <div class="card">
+                    <h1>Stay mine forever? ❤️</h1>
+                    <br><button class="action-btn" onclick="celebrate()">YES ❤️</button>
+                </div>`;
+        }
 
-function celebrate(){
+        function celebrate() {
+            let summary = "I SAID YES ❤️\n\n--- My Journey 💌 ---\n\n";
+            userAnswers.forEach((item, i) => {
+                summary += (i + 1) + ". " + item.q + "\nAnswer: " + item.a + "\n\n";
+            });
+            summary += "Forever Yours. ❤️";
 
-let summary="I SAID YES ❤️\n\nMy Answers 💌\n\n";
-userAnswers.forEach((item,i)=>{
-summary+=(i+1)+". "+item.q+"\nAnswer: "+item.a+"\n\n";
-});
-summary+="Forever Yours ❤️";
+            document.getElementById('main-ui').innerHTML = `
+                <div class="card">
+                    <h1>I Love You ❤️</h1>
+                    <p>Click below to share your heart with me!</p>
+                    <br>
+                    <button class="action-btn" style="background:#25D366" id="final-wa-btn">
+                        Send on WhatsApp 📱
+                    </button>
+                </div>`;
+            
+            document.getElementById('final-wa-btn').onclick = function() {
+                window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(summary), "_blank");
+            };
+            
+            setInterval(createHeart, 200);
+        }
 
-document.getElementById('main-ui').innerHTML=`
-<div class="card">
-<h1>I Love You ❤️</h1>
-<p>Send answers on WhatsApp 💬</p>
-<br>
-<button class="action-btn" style="background:#25D366" onclick="sendToWhatsApp(\`${summary}\`)">
-Send on WhatsApp 📱
-</button>
-</div>`;
-}
-
-function sendToWhatsApp(message){
-window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(message),"_blank");
-}
-
-</script>
+        function createHeart() {
+            const h = document.createElement('div');
+            h.innerHTML = '💖'; h.style.position = 'fixed';
+            h.style.left = Math.random() * 100 + 'vw'; h.style.bottom = '0';
+            h.style.fontSize = '20px'; h.style.transition = 'transform 3s linear, opacity 3s';
+            document.body.appendChild(h);
+            setTimeout(() => { h.style.transform = `translateY(-110vh) rotate(${Math.random()*360}deg)`; h.style.opacity = '0'; }, 50);
+            setTimeout(() => h.remove(), 3000);
+        }
+    </script>
 </body>
 </html>
