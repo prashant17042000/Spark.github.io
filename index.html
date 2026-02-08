@@ -2,256 +2,289 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Chhaya ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Chhaya ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #ff4d6d;
-            --dark-pink: #c9184a;
-            --glass: rgba(255, 255, 255, 0.2);
+            --primary-pink: #ff85a2;
+            --soft-white: #fffafa;
+            --overlay-bg: rgba(255, 255, 255, 0.7);
         }
 
         body, html {
-            margin: 0; padding: 0;
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-            color: white; overflow: hidden; height: 100%;
-            touch-action: manipulation;
-        }
-
-        .heart-bg {
-            position: fixed; bottom: -10%; font-size: 24px;
-            z-index: 0; animation: float 6s linear infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
-
-        .section {
-            min-height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            text-align: center; padding: 20px; box-sizing: border-box;
-        }
-
-        .glass-card {
-            background: var(--glass); backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 30px; padding: 30px 20px;
-            width: 90%; max-width: 400px; z-index: 10;
-        }
-
-        .hidden { display: none !important; }
-
-        .photo-container {
-            width: 160px; height: 160px; border-radius: 50%;
-            border: 4px solid white; overflow: hidden;
-            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .photo-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; margin: 10px 0; }
-        
-        .btn {
-            background: white; color: var(--dark-pink); border: none;
-            padding: 15px 25px; font-size: 1.1rem; border-radius: 50px;
-            font-weight: 600; margin: 10px auto; width: 90%;
-            cursor: pointer; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        input {
-            background: rgba(255,255,255,0.2); border: 2px solid white;
-            padding: 15px; border-radius: 15px; color: white;
-            width: 85%; margin-bottom: 15px; text-align: center; font-size: 1.1rem;
-        }
-
-        /* Anti-Overlap Proposal Layout */
-        .proposal-area {
-            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 100%;
             width: 100%;
-            height: 300px; /* Large space to prevent overlapping */
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #1a1a1a;
+        }
+
+        /* Background Photo Reveal System */
+        #bg-photo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.postimg.cc/NMGHdkrr/file-0000000033747209800b1a195becd98d.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: -1;
+        }
+
+        /* Animation Canvas */
+        #animation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Layout Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--overlay-bg);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } }
+
+        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.5rem; margin-bottom: 20px; }
+        p { color: #444; line-height: 1.6; font-size: 1.1rem; }
+
+        input[type="date"], input[type="text"] {
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-pink);
+            width: 80%;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover { transform: scale(1.05); background: #ff4d7d; }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
             margin-top: 20px;
         }
-        
-        #yes-btn { 
-            position: absolute; 
-            top: 20%; left: 50%; 
-            transform: translate(-50%, -50%);
-            width: 150px;
-            z-index: 100;
+
+        .option-btn {
+            background: white;
+            border: 2px solid var(--primary-pink);
+            color: #d63384;
+            padding: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        
-        #no-btn { 
-            position: absolute; 
-            bottom: 10%; left: 50%; 
-            transform: translateX(-50%);
-            width: 100px; 
-            transition: 0.1s ease;
-            z-index: 50;
-        }
+
+        .option-btn:hover { background: var(--primary-pink); color: white; }
+
+        /* Proposal Section */
+        #proposal-btns { position: relative; height: 100px; margin-top: 30px; }
+        #no-btn { position: absolute; left: 50%; transition: 0.2s; }
+
     </style>
 </head>
 <body>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-    </audio>
+    <div id="bg-photo"></div>
+    <canvas id="animation-canvas"></canvas>
 
-    <div id="auth" class="section">
-        <div class="glass-card">
-            <h2>Unlock Our Memory ❤️</h2>
-            <p>Enter our special date to see your surprise...</p>
-            <input type="text" id="pass-input" placeholder="Enter date here...">
-            <button class="btn" onclick="checkPass()">Unlock ✨</button>
+    <div class="container" id="main-content">
+        <div class="card" id="lock-card">
+            <h1>Our Special Date</h1>
+            <p>Enter the date that changed everything for us...</p>
+            <input type="date" id="date-input">
+            <br>
+            <button onclick="checkDate()">Open My Heart</button>
         </div>
-    </div>
-
-    <div id="page1" class="section hidden">
-        <div class="photo-container">
-            <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
-        </div>
-        <h1>Hey Chhaya ❤️</h1>
-        <p id="typewriter"></p>
-        <button class="btn" id="start-btn" style="display:none;" onclick="startJourney()">I'm ready! ✨</button>
-    </div>
-
-    <div id="journey" class="section hidden">
-        <div class="glass-card">
-            <h2 id="question-text" style="font-size: 1.4rem; margin-bottom: 20px;"></h2>
-            <div id="options"></div>
-        </div>
-    </div>
-
-    <div id="final" class="section hidden">
-        <div class="glass-card">
-            <h1>My Dear Chhaya... ❤️</h1>
-            <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Will you be mine forever?</h2>
-            <div class="proposal-area">
-                <button class="btn" id="yes-btn" onclick="accepted()">YES! 💍</button>
-                <button class="btn" id="no-btn" ontouchstart="moveNo()" onmouseover="moveNo()">No</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="success" class="section hidden">
-        <h1 style="font-size: 3rem;">YES! ❤️🎉</h1>
-        <div class="photo-container">
-            <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
-        </div>
-        <p>I am the luckiest person in the world! ❤️</p>
-        <button class="btn" onclick="share()">Send me the news! 📱</button>
     </div>
 
     <script>
-        const responses = {};
-        let currentStep = 0;
-        const music = document.getElementById('bg-music');
-
-        function checkPass() {
-            const val = document.getElementById('pass-input').value.trim().toLowerCase();
-            if(val === "15 jan 2025") {
-                document.getElementById('auth').classList.add('hidden');
-                document.getElementById('page1').classList.remove('hidden');
-                music.play();
-                type();
-            } else { alert("Incorrect! Think about our special day... ❤️"); }
-        }
-
-        function type() {
-            const text = "I made something special from my heart... only for you. Are you ready?";
-            let i = 0;
-            const interval = setInterval(() => {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                if (i >= text.length) {
-                    clearInterval(interval);
-                    document.getElementById('start-btn').style.display = "block";
-                }
-            }, 50);
-        }
-
         const questions = [
-            { q: "What was your first impression of me?", options: ["Sweet & Kind 😊", "Mysterious & Charming ✨"], key: "Impression" },
-            { q: "Write a cute nickname for me:", type: "input", key: "Nickname" },
-            { q: "Which habit of mine do you love most?", options: ["The way I care ❤️", "The way I talk 🗣️"], key: "Favorite Habit" },
-            { q: "What is my favorite thing to do with you?", options: ["Long Conversations 💬", "Exploring Places 🌍"], key: "Favorite Activity" },
-            { q: "Where do you see us in 5 years?", options: ["Building a home 🏡", "Traveling the world ✈️"], key: "Future" },
-            { q: "What's my best quality according to you?", options: ["Loyalty 🤝", "Sense of humor 😂"], key: "Best Quality" },
-            { q: "Rate our chemistry:", options: ["8", "9", "10", "Infinite! 🔥"], key: "Chemistry" },
-            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" }
+            { q: "What impression have I created on you over time?", options: ["Someone you can always rely on ⚓", "Someone who understands you best 💡", "A constant source of happiness 😊", "A partner who grows with you 🌱"] },
+            { q: "Write a cute nickname for me:", type: "text" },
+            { q: "Which habit of mine do you love most?", options: ["The way I care ❤️", "The way I talk 🗣️"] },
+            { q: "What is my favorite thing to do with you?", options: ["Holding hands & walking 🤝", "Getting lost in your eyes 👀"] },
+            { q: "One thing I do that always makes you smile?", options: ["My daily 'Good Morning' texts ☀️", "The way I tease and annoy you 😜"] },
+            { q: "What do you feel most when you are with me?", options: ["No fear of being judged 🕊️", "No fear of how I’ll react 😌"] },
+            { q: "What is the hardest thing to understand about me?", options: ["My silent moods 😶", "My overthinking mind 🧠"] },
+            { q: "But despite that, how do we make it work?", options: ["With your endless patience 🌊", "By always talking it out 🗣️❤️"] },
+            { q: "What can we improve together to strengthen our bond?", options: ["More quality time ⏳", "Better listening 👂", "Sharing more feelings 💬", "More patience with each other 🙏"] },
+            { q: "My best quality according to you?", options: ["My honesty & loyalty 🤝", "The way I make you feel safe ❤️"] },
+            { q: "What gives you the most confidence in 'us'?", options: ["The way we handle differences 🤝", "The fact that we never give up ⚓"] },
+            { q: "Rate our chemistry:", options: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
+            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"] },
+            { q: "Relive one moment: Which memory of us would you choose to go back to?", type: "text" },
+            { q: "Are you ready to see what's at the end of this journey?", options: ["Yes, take me there ❤️"] }
         ];
 
-        function showQuestion() {
-            if (currentStep >= questions.length) {
-                document.getElementById('journey').classList.add('hidden');
-                document.getElementById('final').classList.remove('hidden');
-                return;
-            }
-            const data = questions[currentStep];
-            document.getElementById('question-text').innerText = data.q;
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
+        let currentStep = 0;
 
-            if(data.type === "input") {
-                const input = document.createElement('input');
-                input.id = "nick-input"; input.placeholder = "Type here...";
-                optionsDiv.appendChild(input);
-                const nextBtn = document.createElement('button');
-                nextBtn.className = "btn"; nextBtn.innerText = "Next ✨";
-                nextBtn.onclick = () => {
-                    const val = document.getElementById('nick-input').value.trim();
-                    if(val !== "") { responses[data.key] = val; currentStep++; showQuestion(); }
-                    else { alert("Please write a nickname! ❤️"); }
-                };
-                optionsDiv.appendChild(nextBtn);
+        function checkDate() {
+            const input = document.getElementById('date-input').value;
+            // 15 Jan 2025
+            if (input === '2025-01-15') {
+                nextQuestion();
             } else {
-                data.options.forEach(opt => {
-                    const b = document.createElement('button');
-                    b.className = 'btn'; b.innerText = opt;
-                    b.onclick = () => { responses[data.key] = opt; currentStep++; showQuestion(); };
-                    optionsDiv.appendChild(b);
-                });
+                alert("That's not the right date... try again ❤️");
             }
+        }
+
+        function nextQuestion() {
+            const container = document.getElementById('main-content');
+            const bg = document.getElementById('bg-photo');
+            
+            // Background Reveal Logic
+            bg.style.opacity = (currentStep / (questions.length - 1));
+
+            if (currentStep < questions.length) {
+                const item = questions[currentStep];
+                let content = `<div class="card"><h1>Question ${currentStep + 1}</h1><p>${item.q}</p>`;
+                
+                if (item.type === "text") {
+                    content += `<input type="text" id="text-ans" placeholder="Type here..."><br><button onclick="saveAndNext()">Continue</button>`;
+                } else {
+                    content += `<div class="options-grid">`;
+                    item.options.forEach(opt => {
+                        content += `<button class="option-btn" onclick="nextQuestion()">${opt}</button>`;
+                    });
+                    content += `</div>`;
+                }
+                
+                content += `</div>`;
+                container.innerHTML = content;
+                currentStep++;
+            } else {
+                showProposal();
+            }
+        }
+
+        function saveAndNext() { nextQuestion(); }
+
+        function showProposal() {
+            const container = document.getElementById('main-content');
+            container.innerHTML = `
+                <div class="card">
+                    <h1>Chhaya, my love...</h1>
+                    <p>Through every mood, every silence, and every tease... you are my safe place. I promise to always be yours.</p>
+                    <h2>Will you spend forever with me?</h2>
+                    <div id="proposal-btns">
+                        <button onclick="celebrate()">YES! ❤️</button>
+                        <button id="no-btn" onmouseover="moveNo()">No 😢</button>
+                    </div>
+                </div>
+            `;
         }
 
         function moveNo() {
-            const noBtn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * 150 - 75;
+            const y = Math.random() * 150 - 75;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        function startJourney() {
-            document.getElementById('page1').classList.add('hidden');
-            document.getElementById('journey').classList.remove('hidden');
-            showQuestion();
+        function celebrate() {
+            const container = document.getElementById('main-content');
+            container.innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the happiest person alive. See you soon, my Valentine.</p></div>`;
+            setInterval(createHeart, 100);
         }
 
-        function accepted() {
-            document.getElementById('final').classList.add('hidden');
-            document.getElementById('success').classList.remove('hidden');
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        // --- Bestest Animation (Blossom Rain) ---
+        const canvas = document.getElementById('animation-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const petals = [];
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 5 + 2;
+                this.speed = Math.random() * 2 + 1;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 0.2 - 0.1;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle * Math.PI / 180);
+                ctx.fillStyle = "#ffb7c5";
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size/2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.angle) * 0.5;
+                this.angle += this.spin;
+                if (this.y > canvas.height) this.y = -20;
+            }
         }
 
-        function share() {
-            let text = "YES! I want to be yours forever Chhaya ❤️\n\nMy Answers:\n";
-            for (const [key, value] of Object.entries(responses)) { text += `• ${key}: ${value}\n`; }
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-        }
+        for (let i = 0; i < 50; i++) petals.push(new Petal());
 
-        setInterval(() => {
-            const h = document.createElement('div');
-            h.classList.add('heart-bg');
-            h.innerText = ['❤️', '💖', '✨'][Math.floor(Math.random() * 3)];
-            h.style.left = Math.random() * 100 + "vw";
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 6000);
-        }, 600);
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            heart.style.transition = '4s';
+            heart.style.zIndex = '1000';
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.style.transform = `translateY(-120vh) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            }, 100);
+            setTimeout(() => heart.remove(), 4000);
+        }
     </script>
 </body>
-</html>
+    </html>
+    
