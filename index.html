@@ -20,7 +20,6 @@
             overflow: hidden;
         }
 
-        /* Pulsing Music Icon */
         #music-btn {
             position: fixed; top: 20px; right: 20px; z-index: 100;
             cursor: pointer; background: white; padding: 12px;
@@ -62,16 +61,14 @@
             line-height: 1.6; font-weight: 600;
         }
 
-        /* LUXURY CAPSULE INPUTS */
         input {
             padding: 18px 25px; border-radius: 35px;
             border: 2px solid var(--soft-pink); width: 85%;
             font-size: 1.1rem; margin-bottom: 15px; outline: none;
             background: #fffafa; color: #d63384;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
         }
-        input:focus { border-color: var(--hot-pink); transform: scale(1.03); box-shadow: 0 0 20px var(--glow); }
+        input:focus { border-color: var(--hot-pink); box-shadow: 0 0 20px var(--glow); }
 
         .action-btn {
             background: var(--hot-pink); color: white; border: none;
@@ -85,7 +82,7 @@
             width: 100%; padding: 15px; margin: 10px 0; border-radius: 35px;
             font-weight: 600; cursor: pointer; transition: 0.3s;
         }
-        .opt-btn:hover { background: var(--hot-pink); color: white; transform: scale(1.02); }
+        .opt-btn:hover { background: var(--hot-pink); color: white; }
     </style>
 </head>
 <body>
@@ -127,12 +124,11 @@
 
         let step = 0;
         let playing = false;
+        let userAnswers = [];
         const music = document.getElementById('bg-music');
 
         function showLock() {
-            // Trigger audio permission
-            music.play().then(() => { music.pause(); }).catch(e => console.log("Ready for unlock"));
-            
+            music.play().then(() => { music.pause(); }).catch(e => console.log("Audio ready"));
             document.getElementById('main-ui').innerHTML = `
                 <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s ease;">
                     <div class="polaroid">
@@ -140,9 +136,9 @@
                     </div>
                     <div class="card">
                         <h1>Unlock</h1>
-                        <p>Enter our special date...</p>
+                        <p>Enter our special date (15 Jan 2025)...</p>
                         <input type="date" id="date-input">
-                        <br><button class="action-btn" onclick="unlock()">Open My Heart</button>
+                        <br><button class="action-btn" onclick="unlock()">Enter My Heart</button>
                     </div>
                 </div>`;
         }
@@ -154,7 +150,7 @@
                     document.getElementById('music-btn').style.display = 'flex';
                 });
                 showNext();
-            } else { alert("Try again, love... 15 Jan 2025 ❤️"); }
+            } else { alert("Try again, love... ❤️"); }
         }
 
         function toggleMusic() {
@@ -175,6 +171,12 @@
             }
         }
 
+        function saveAndNext(answer) {
+            userAnswers.push({question: questions[step].q, answer: answer});
+            step++;
+            showNext();
+        }
+
         function showNext() {
             const ui = document.getElementById('main-ui');
             if (step < questions.length) {
@@ -183,10 +185,10 @@
                 typeWriter(q.q, 0, () => {
                     const box = document.getElementById('options-box');
                     if (q.type === "text") {
-                        box.innerHTML = `<input type="text" id="ans" placeholder="Write here..."><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
+                        box.innerHTML = `<input type="text" id="ans" placeholder="Type here..."><br><button class="action-btn" onclick="saveAndNext(document.getElementById('ans').value)">Next</button>`;
                     } else {
                         let btns = ``;
-                        q.opts.forEach(o => btns += `<button class="opt-btn" onclick="step++; showNext()">${o}</button>`);
+                        q.opts.forEach(o => btns += `<button class="opt-btn" onclick="saveAndNext('${o}')">${o}</button>`);
                         box.innerHTML = btns;
                     }
                 });
@@ -207,7 +209,18 @@
         }
 
         function celebrate() {
-            document.getElementById('main-ui').innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the luckiest person.</p><br><button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=I+said+YES!+❤️')">WhatsApp Me</button></div>`;
+            let finalMessage = "I said YES! ❤️\n\nMy Responses:\n";
+            userAnswers.forEach((item, index) => {
+                finalMessage += `${index + 1}. ${item.question}: ${item.answer}\n`;
+            });
+            
+            document.getElementById('main-ui').innerHTML = `
+                <div class="card">
+                    <h1>I Love You! ❤️</h1>
+                    <p>Forever starts now.</p>
+                    <br>
+                    <button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=${encodeURIComponent(finalMessage)}')">WhatsApp My Answers 📱</button>
+                </div>`;
             setInterval(createHeart, 150);
         }
 
