@@ -10,7 +10,6 @@
             --hot-pink: #ff4d94;
             --soft-pink: #ffb7c5;
             --bg-pink: #fff0f3;
-            --aura: rgba(255, 77, 148, 0.25);
         }
 
         body, html {
@@ -20,13 +19,12 @@
             overflow: hidden;
         }
 
-        /* Music Controls */
         #music-btn {
             position: fixed; top: 20px; right: 20px; z-index: 100;
             cursor: pointer; background: white; padding: 12px;
-            border-radius: 50%; box-shadow: 0 4px 20px var(--aura);
+            border-radius: 50%; box-shadow: 0 4px 15px rgba(255, 77, 148, 0.2);
             font-size: 22px; border: 2px solid var(--soft-pink);
-            display: none; transition: 0.3s;
+            display: none;
         }
 
         canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
@@ -43,55 +41,10 @@
             padding: 40px 30px; border-radius: 40px;
             box-shadow: 0 20px 60px rgba(255, 77, 148, 0.2);
             max-width: 380px; width: 100%; text-align: center;
-            border: 2px solid white; animation: float 4s infinite ease-in-out;
+            border: 2px solid white;
         }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* Elegant Title Box Style */
-        .title-box {
-            font-family: 'Dancing Script', cursive;
-            color: var(--hot-pink);
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-        }
-
-        #typewriter-text {
-            font-family: 'Courier Prime', monospace;
-            color: #444; font-size: 1.15rem; min-height: 80px;
-            margin-bottom: 25px; line-height: 1.6; font-weight: 600;
-        }
-
-        /* The "Non-Boring" Capsule Inputs */
-        input {
-            padding: 18px 25px; border-radius: 30px;
-            border: 2px solid var(--soft-pink); width: 85%;
-            font-size: 1.1rem; margin-bottom: 15px; outline: none;
-            background: #fffafa; color: #d63384;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        input:focus {
-            border-color: var(--hot-pink); transform: scale(1.03);
-            box-shadow: 0 0 15px var(--aura);
-        }
-
-        .action-btn {
-            background: var(--hot-pink); color: white; border: none;
-            padding: 16px 45px; border-radius: 40px; font-size: 1.2rem;
-            font-weight: 600; cursor: pointer; transition: 0.4s;
-            box-shadow: 0 8px 25px var(--aura);
-        }
-
-        .opt-btn {
-            background: white; color: var(--hot-pink); border: 2px solid var(--soft-pink);
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 30px;
-            font-weight: 600; cursor: pointer; transition: 0.3s;
-        }
-        .opt-btn:hover { background: var(--hot-pink); color: white; transform: translateX(5px); }
-
+        /* Polaroid Memory Style */
         .polaroid {
             background: white; padding: 12px 12px 45px 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
@@ -99,6 +52,39 @@
             border: 1px solid #f1f1f1; display: inline-block;
         }
         .polaroid img { width: 230px; border-radius: 2px; }
+
+        h1 { font-family: 'Dancing Script', cursive; color: var(--hot-pink); font-size: 3rem; margin: 0; }
+        p { color: #555; line-height: 1.6; font-size: 1.1rem; }
+        
+        #typewriter-text {
+            font-family: 'Courier Prime', monospace; color: #333;
+            font-size: 1.15rem; min-height: 80px; margin-bottom: 25px;
+            line-height: 1.6; font-weight: 600;
+        }
+
+        /* Glowing Capsule Inputs */
+        input {
+            padding: 18px 25px; border-radius: 30px;
+            border: 2px solid var(--soft-pink); width: 85%;
+            font-size: 1.1rem; margin-bottom: 15px; outline: none;
+            background: #fffafa; color: #d63384;
+            transition: 0.4s ease;
+        }
+        input:focus { border-color: var(--hot-pink); box-shadow: 0 0 15px rgba(255, 77, 148, 0.3); }
+
+        .action-btn {
+            background: var(--hot-pink); color: white; border: none;
+            padding: 16px 45px; border-radius: 40px; font-size: 1.2rem;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.3);
+        }
+
+        .opt-btn {
+            background: white; color: var(--hot-pink); border: 2px solid var(--soft-pink);
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 30px;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .opt-btn:hover { background: var(--hot-pink); color: white; }
     </style>
 </head>
 <body>
@@ -106,13 +92,13 @@
     <canvas id="petal-canvas"></canvas>
     <div id="music-btn" onclick="toggleMusic()">🎵</div>
     
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="main-ui">
         <div class="card" id="intro-card">
-            <div class="title-box">Hi Chhaya ❤️</div>
+            <h1>Hi Chhaya ❤️</h1>
             <p>I was thinking about us today... and I realized I have something special for you.</p>
             <br>
             <button class="action-btn" onclick="showLock()">What is it? ✨</button>
@@ -143,17 +129,17 @@
         const music = document.getElementById('bg-music');
 
         function showLock() {
-            // Trigger audio context for browsers
-            music.play().then(() => { music.pause(); }).catch(() => {});
+            // Step 1: Initialize Audio Context on first click
+            music.play().then(() => { music.pause(); }).catch(e => console.log("Audio Init"));
             
             document.getElementById('main-ui').innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s ease;">
+                <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1.5s ease;">
                     <div class="polaroid">
                         <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Memory">
                     </div>
                     <div class="card">
-                        <div class="title-box">Unlock</div>
-                        <p>Enter our special date...</p>
+                        <h1>Unlock</h1>
+                        <p>Enter our special date (15 Jan 2025)...</p>
                         <input type="date" id="date-input">
                         <br><button class="action-btn" onclick="unlock()">Enter My Heart</button>
                     </div>
@@ -162,11 +148,13 @@
 
         function unlock() {
             if (document.getElementById('date-input').value === '2025-01-15') {
-                music.play();
-                playing = true;
-                document.getElementById('music-btn').style.display = 'flex';
+                // Step 2: Play audio on second interaction (Unlock)
+                music.play().then(() => {
+                    playing = true;
+                    document.getElementById('music-btn').style.display = 'flex';
+                });
                 showNext();
-            } else { alert("Try again, Chhaya... ❤️"); }
+            } else { alert("Try again, love... ❤️"); }
         }
 
         function toggleMusic() {
@@ -179,7 +167,7 @@
         function typeWriter(text, i, fnCallback) {
             const el = document.getElementById("typewriter-text");
             if (i < text.length) {
-                el.innerHTML = text.substring(0, i+1) + '<span style="color:var(--hot-pink)">_</span>';
+                el.innerHTML = text.substring(0, i+1) + '<span style="color:var(--hot-pink)">|</span>';
                 setTimeout(() => typeWriter(text, i + 1, fnCallback), 45);
             } else if (fnCallback) {
                 el.innerHTML = text;
@@ -191,11 +179,11 @@
             const ui = document.getElementById('main-ui');
             if (step < questions.length) {
                 const q = questions[step];
-                ui.innerHTML = `<div class="card"><div class="title-box" style="font-size:2rem">Step ${step+1}</div><div id="typewriter-text"></div><div id="options-box"></div></div>`;
+                ui.innerHTML = `<div class="card"><h1>Step ${step+1}</h1><div id="typewriter-text"></div><div id="options-box"></div></div>`;
                 typeWriter(q.q, 0, () => {
                     const box = document.getElementById('options-box');
                     if (q.type === "text") {
-                        box.innerHTML = `<input type="text" id="ans" placeholder="Write from your heart..."><br><button class="action-btn" onclick="step++; showNext()">Next</button>`;
+                        box.innerHTML = `<input type="text" id="ans" placeholder="Write from your heart..."><br><button class="action-btn" onclick="step++; showNext()">Continue</button>`;
                     } else {
                         let btns = ``;
                         q.opts.forEach(o => btns += `<button class="opt-btn" onclick="step++; showNext()">${o}</button>`);
@@ -208,7 +196,7 @@
         function proposal() {
             document.getElementById('main-ui').innerHTML = `
                 <div class="card">
-                    <div class="title-box">Chhaya... ❤️</div>
+                    <h1>Chhaya... ❤️</h1>
                     <div id="typewriter-text"></div>
                     <div style="position:relative; height:120px;">
                         <button class="action-btn" onclick="celebrate()">YES! ❤️</button>
@@ -219,11 +207,11 @@
         }
 
         function celebrate() {
-            document.getElementById('main-ui').innerHTML = `<div class="card"><div class="title-box">Forever! ❤️</div><p>I love you more than words can express.</p><br><button class="action-btn" style="background:#25D366; font-size:1rem; padding:12px 30px;" onclick="window.open('https://wa.me/?text=I+said+YES!+❤️')">WhatsApp Me</button></div>`;
+            document.getElementById('main-ui').innerHTML = `<div class="card"><h1>I Love You Forever! ❤️</h1><p>You've made me the luckiest person alive.</p><br><button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=I+said+YES!+❤️')">Tell me on WhatsApp</button></div>`;
             setInterval(createHeart, 150);
         }
 
-        // --- Visuals ---
+        // --- Animations ---
         const canvas = document.getElementById('petal-canvas'); const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const petals = [];
