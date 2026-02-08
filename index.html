@@ -10,7 +10,7 @@
         :root {
             --pink: #ff4d6d;
             --dark-pink: #c9184a;
-            --glass: rgba(255, 255, 255, 0.25);
+            --glass: rgba(255, 255, 255, 0.2);
             --glass-border: rgba(255, 255, 255, 0.4);
         }
 
@@ -20,7 +20,7 @@
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
             color: white;
-            overflow-x: hidden;
+            overflow: hidden;
             height: 100%;
         }
 
@@ -30,7 +30,7 @@
             top: 20px;
             width: 80%;
             left: 10%;
-            height: 4px;
+            height: 6px;
             background: rgba(255,255,255,0.3);
             border-radius: 10px;
             z-index: 100;
@@ -43,29 +43,22 @@
             position: relative;
             transition: width 0.5s ease;
         }
-        #progress-heart {
-            position: absolute;
-            right: -10px;
-            top: -8px;
-            font-size: 18px;
-        }
+        #progress-heart { position: absolute; right: -10px; top: -8px; font-size: 20px; }
 
-        /* Floating Elements */
-        .heart {
+        /* Background Floating Hearts */
+        .heart-bg {
             position: fixed;
             bottom: -10%;
             font-size: 24px;
             z-index: 0;
             animation: float 6s linear infinite;
-            opacity: 0.8;
         }
-
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Glassmorphism Styles */
+        /* Glassmorphism Card */
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(15px);
@@ -73,7 +66,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 30px;
             padding: 30px 20px;
-            width: 90%;
+            width: 85%;
             max-width: 400px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             z-index: 10;
@@ -88,11 +81,12 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
         }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; }
 
-        /* Photo & Animations */
+        /* Photo Styles */
         .photo-container {
             width: 180px;
             height: 180px;
@@ -111,38 +105,41 @@
             background: white;
             color: var(--dark-pink);
             border: none;
-            padding: 15px 30px;
+            padding: 15px 25px;
             font-size: 1.1rem;
             border-radius: 50px;
             font-weight: 600;
-            margin: 10px;
-            width: 85%;
+            margin: 10px auto;
+            width: 90%;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: block;
         }
         .btn:active { transform: scale(0.95); }
-        .rating-btn { padding: 20px; font-size: 1.3rem; }
 
-        /* Music Toggle */
         #music-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; border: 1px solid var(--glass-border);
+            cursor: pointer; font-size: 20px;
         }
 
-        /* Typewriter text */
-        #typewriter { font-size: 1.2rem; min-height: 3em; margin-bottom: 20px; }
+        #typewriter { font-size: 1.2rem; min-height: 3em; margin-bottom: 20px; font-weight: 600; }
+
+        /* Propose Day Logic */
+        .proposal-btns {
+            position: relative;
+            height: 120px;
+            margin-top: 20px;
+        }
+        #yes-btn { width: 120px; display: inline-block; }
+        #no-btn { width: 120px; display: inline-block; transition: 0.2s ease; }
 
     </style>
 </head>
@@ -168,16 +165,31 @@
 
     <div id="journey" class="section hidden">
         <div class="glass-card">
-            <h2 id="question-text" style="font-size: 1.5rem; margin-bottom: 25px;"></h2>
+            <h2 id="question-text" style="font-size: 1.4rem; margin-bottom: 20px;"></h2>
             <div id="options"></div>
         </div>
     </div>
 
     <div id="final" class="section hidden">
-        <h1 style="font-size: 3.5rem;">I LOVE YOU <br>CHHAYA ❤️</h1>
-        <p style="font-size: 1.2rem;">My heart is yours forever.</p>
-        <button class="btn" onclick="shareAnswers()">Share our memories 📱</button>
-        <button class="btn" style="background: transparent; color: white; border: 1px solid white;" onclick="location.reload()">Replay 🔄</button>
+        <div class="glass-card">
+            <h1>Chhaya... ❤️</h1>
+            <p>I want to make every moment of my life as beautiful as you are.</p>
+            <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Will you be mine forever?</h2>
+            
+            <div class="proposal-btns">
+                <button class="btn" id="yes-btn" onclick="accepted()">YES! 💍</button>
+                <button class="btn" id="no-btn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success" class="section hidden">
+        <h1 style="font-size: 3.5rem;">YES! ❤️🎉</h1>
+        <div class="photo-container" style="width: 140px; height: 140px; margin: 0 auto 20px;">
+            <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
+        </div>
+        <p>This is the happiest day of my life!</p>
+        <button class="btn" onclick="share()">Share the news with me 📱</button>
     </div>
 
     <script>
@@ -190,27 +202,25 @@
             { q: "What's our perfect date?", options: ["Candlelight Dinner 🕯️", "Cozy Movie Night 🍿"], key: "Date" },
             { q: "Where should we travel first?", options: ["Mountains 🏔️", "Beach Side 🌊"], key: "Travel" },
             { q: "Long drives or long walks?", options: ["Long Drives 🚗", "Long Walks 🚶‍♀️"], key: "Vibe" },
-            { q: "Rate how much you like me:", options: ["7", "8", "9", "10"], key: "Like", type: "rating" },
-            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry", type: "rating" },
-            { q: "Excitement level for us?", options: ["7", "8", "9", "10"], key: "Excitement", type: "rating" }
+            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry", type: "rating" }
         ];
 
         // Typewriter Effect
         const introText = "I made something special from my heart... only for you. Are you ready?";
-        let i = 0;
-        function typeWriter() {
-            if (i < introText.length) {
-                document.getElementById("typewriter").innerHTML += introText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
+        let charIndex = 0;
+        function type() {
+            if (charIndex < introText.length) {
+                document.getElementById("typewriter").innerHTML += introText.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 50);
             } else {
                 document.getElementById('start-btn').style.display = "block";
             }
         }
-        window.onload = typeWriter;
+        window.onload = type;
 
         function toggleMusic() {
-            return music.paused ? music.play() : music.pause();
+            music.paused ? music.play() : music.pause();
         }
 
         function startJourney() {
@@ -222,11 +232,12 @@
 
         function showQuestion() {
             if (currentStep >= questions.length) {
-                showFinal();
+                document.getElementById('journey').classList.add('hidden');
+                document.getElementById('final').classList.remove('hidden');
+                document.getElementById('progress-container').style.display = "none";
                 return;
             }
 
-            // Update Progress Bar
             const prog = (currentStep / questions.length) * 100;
             document.getElementById('progress-bar').style.width = prog + "%";
 
@@ -235,18 +246,9 @@
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = '';
             
-            if (data.type === 'rating') {
-                optionsDiv.style.display = "grid";
-                optionsDiv.style.gridTemplateColumns = "1fr 1fr";
-                optionsDiv.style.gap = "10px";
-            } else {
-                optionsDiv.style.display = "block";
-            }
-
             data.options.forEach(opt => {
                 const b = document.createElement('button');
                 b.className = 'btn';
-                if(data.type === 'rating') b.classList.add('rating-btn');
                 b.innerText = opt;
                 b.onclick = () => {
                     responses[data.key] = opt;
@@ -257,46 +259,47 @@
             });
         }
 
-        function showFinal() {
-            document.getElementById('journey').classList.add('hidden');
-            document.getElementById('final').classList.remove('hidden');
-            document.getElementById('progress-container').style.display = "none";
-            
-            // Confetti Burst
-            var duration = 5 * 1000;
-            var end = Date.now() + duration;
+        function moveNo() {
+            const noBtn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
 
+        function accepted() {
+            document.getElementById('final').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+            
+            // Confetti
+            var end = Date.now() + (7 * 1000);
             (function frame() {
-              confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffffff'] });
-              confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffffff'] });
+              confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffffff'] });
+              confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffffff'] });
               if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
 
-        function shareAnswers() {
-            let text = "Hey! I just finished your surprise website Chhaya ❤️\n\n";
+        function share() {
+            let text = "Hey! It's a YES Chhaya ❤️\n\n";
             for (const [key, value] of Object.entries(responses)) {
                 text += `*${key}*: ${value}\n`;
             }
-            if (navigator.share) {
-                navigator.share({ title: 'My Heart for You', text: text });
-            } else {
-                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-            }
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url);
         }
 
-        // Floating Hearts Logic
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerText = ['❤️', '💖', '✨', '🌸'][Math.floor(Math.random() * 4)];
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 2 + 4) + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-        setInterval(createHeart, 500);
+        // BG Hearts
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.classList.add('heart-bg');
+            h.innerText = ['❤️', '💖', '✨'][Math.floor(Math.random() * 3)];
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = (Math.random() * 2 + 4) + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 6000);
+        }, 600);
     </script>
 </body>
-    </html>
-    
+</html>
