@@ -41,7 +41,7 @@
         .opt-btn {
             background: white; color: var(--hot-pink); border: 2px solid var(--soft-pink);
             width: 100%; padding: 14px; margin: 8px 0; border-radius: 35px; cursor: pointer;
-            font-weight: 600;
+            font-weight: 600; font-size: 0.9rem;
         }
         .opt-btn:hover { background: var(--hot-pink); color: white; }
         #musicBtn {
@@ -86,11 +86,11 @@
             { q: "Write a cute nickname for me:", type: "text" },
             { q: "Which habit of mine do you love most?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
             { q: "What is my favorite thing to do with you?", opts: ["Holding hands 🤝", "Getting lost in your eyes 👀"] },
-            { q: "One thing I do that always makes you smile?", opts: ["Daily 'Good Morning' texts ☀️", "Teasing & annoying you 😜"] },
+            { q: "One thing I do that always makes you smile?", opts: ["Daily Good Morning texts ☀️", "Teasing & annoying you 😜"] },
             { q: "What do you feel most when you are with me?", opts: ["No fear of judgment 🕊️", "No fear of reaction 😌"] },
             { q: "What is the hardest thing to understand about me?", opts: ["My silent moods 😶", "My overthinking mind 🧠"] },
             { q: "But despite that, how do we make it work?", opts: ["Endless patience 🌊", "Always talking it out 🗣️❤️"] },
-            { q: "What can we improve together?", type: "text", label: "Write your thoughts..." },
+            { q: "What can we improve together?", opts: ["Quality time ⏳", "Listening 👂", "Expression of feelings 💬", "Patience 🙏"] },
             { q: "My best quality according to you?", opts: ["Honesty & loyalty 🤝", "Making you feel safe ❤️"] },
             { q: "What gives you the most confidence in 'us'?", opts: ["Handling differences 🤝", "Never giving up ⚓"] },
             { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
@@ -123,14 +123,14 @@
                     musicBtn.style.display = "block";
                 });
                 showNext();
-            } else { alert("Not that date, love... try again ❤️"); }
+            } else { alert("Try again, love... ❤️"); }
         }
 
         function validateAndSave() {
             const inputField = document.getElementById('ans_input');
             const val = inputField.value.trim();
             if (val === "") {
-                alert("Please write something for me, Chhaya... ❤️");
+                alert("Please write something for me... ❤️");
                 return;
             }
             saveAndNext(val);
@@ -151,13 +151,14 @@
 
                 if (q.type === "text") {
                     box.innerHTML = `
-                        <input type="text" id="ans_input" placeholder="${q.label || 'Type here...'}">
+                        <input type="text" id="ans_input" placeholder="Type here...">
                         <br>
                         <button class="action-btn" onclick="validateAndSave()">Next</button>`;
                 } else {
                     let btns = "";
                     q.opts.forEach(o => {
-                        btns += `<button class="opt-btn" onclick="saveAndNext('${o}')">${o}</button>`;
+                        // Using backticks to avoid quote issues with "Good Morning"
+                        btns += "<button class='opt-btn' onclick=\"saveAndNext('" + o.replace(/'/g, "\\'") + "')\">" + o + "</button>";
                     });
                     box.innerHTML = btns;
                 }
