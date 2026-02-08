@@ -6,127 +6,71 @@
 
 <style>
 body{
-  margin:0;
-  font-family:'Segoe UI',sans-serif;
-  text-align:center;
-  height:100vh;
-  overflow:hidden;
-  color:white;
-  background:linear-gradient(135deg,#ff4d6d,#ff8fa3);
+ margin:0;
+ font-family:Segoe UI;
+ height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ background:linear-gradient(135deg,#ff4d6d,#ff8fa3);
+ color:white;
+ overflow:hidden;
 }
-
-/* floating hearts */
-.heart{
-  position:absolute;
-  color:#fff;
-  font-size:20px;
-  animation:float 6s linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(100vh); opacity:0;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh); opacity:0;}
-}
-
-.page{display:none; padding-top:70px}
+.page{display:none}
 .active{display:block}
-
-h1{font-size:55px;margin:20px}
-h2{font-size:32px;margin:20px}
-
+h1{font-size:45px}
+h2{font-size:26px}
 button{
-  padding:18px 40px;
-  font-size:22px;
-  border:none;
-  border-radius:40px;
-  margin:20px;
-  cursor:pointer;
-  background:white;
-  color:#ff4d6d;
-  font-weight:bold;
-  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+ padding:15px 30px;
+ font-size:20px;
+ border:none;
+ border-radius:30px;
+ background:white;
+ color:#ff4d6d;
+ margin:15px;
 }
-
-button:hover{transform:scale(1.1)}
-
-#noBtn{position:absolute}
-
-.big{font-size:60px}
+img{
+ width:200px;
+ height:200px;
+ border-radius:50%;
+ object-fit:cover;
+ box-shadow:0 0 25px white;
+}
+canvas{position:fixed;top:0;left:0;pointer-events:none}
 </style>
 </head>
 
 <body>
 
-<!-- floating hearts generator -->
-<script>
-for(let i=0;i<25;i++){
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(3+Math.random()*3)+"s";
-  document.body.appendChild(heart);
-}
-</script>
+<canvas id="confetti"></canvas>
 
-<!-- PAGE 1 -->
-<div id="page1" class="page active">
-  <h1 class="big">Hey Beautiful 😘</h1>
-  <h2>I made something special just for you ❤️</h2>
-  <button onclick="nextPage(2)">Open it 💌</button>
+<div id="p1" class="page active">
+<img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png">
+ <h1>Hey Beautiful 😘</h1>
+ <button onclick="next(2)">Open 💌</button>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-  <h1>Will you be my Valentine? 💖</h1>
-  <button onclick="nextPage(3)">YES 😍</button>
-  <button id="noBtn">NO 🙈</button>
+<div id="p2" class="page">
+ <h1>Will you be my Valentine? ❤️</h1>
+ <button onclick="next(3)">YES 😍</button>
+ <button id="noBtn">NO 🙈</button>
 </div>
 
-<!-- QUESTIONS -->
-<div id="page3" class="page">
-  <h1>You make my world brighter ☀️</h1>
-  <h2>Do you enjoy being with me? 😊</h2>
-  <button onclick="nextPage(4)">Of course 💕</button>
-</div>
+<div id="p3" class="page"><h1>Do you like spending time with me? 😊</h1><button onclick="next(4)">Yes 💕</button></div>
+<div id="p4" class="page"><h1>Do I make you smile? 😄</h1><button onclick="next(5)">Always 😘</button></div>
+<div id="p5" class="page"><h1>Do you miss me? 🥺</h1><button onclick="next(6)">Yes 💖</button></div>
+<div id="p6" class="page"><h1>Do you love our chats? 📱</h1><button onclick="next(7)">So much 💬</button></div>
+<div id="p7" class="page"><h1>Will you go on dates with me? 🍕</h1><button onclick="next(8)">Of course 😍</button></div>
+<div id="p8" class="page"><h1>Can we make memories? 📸</h1><button onclick="next(9)">Yes 💞</button></div>
+<div id="p9" class="page"><h1>Will you hold my hand forever? 🤝</h1><button onclick="next(10)">Yes 💍</button></div>
 
-<div id="page4" class="page">
-  <h1>Your smile = My happiness 😍</h1>
-  <h2>Do I make you smile? 😄</h2>
-  <button onclick="nextPage(5)">Always 😘</button>
-</div>
-
-<div id="page5" class="page">
-  <h1>I want endless memories with you 💑</h1>
-  <h2>Can we stay together forever? ❤️</h2>
-  <button onclick="nextPage(6)">Yes please 💍</button>
-</div>
-
-<!-- FINAL PAGE -->
-<div id="page6" class="page">
-  <h1 class="big">I LOVE YOU ❤️</h1>
-  <h2>Will you be mine forever? 💖</h2>
-  <button onclick="celebrate()">YESSS 😍💋</button>
-  <h1 id="msg"></h1>
+<div id="p10" class="page">
+ <h1>I LOVE YOU ❤️</h1>
+ <h2>Will you be mine forever?</h2>
+ <button onclick="celebrate()">YESSS 😍💋</button>
+ <div id="replay"></div>
 </div>
 
 <script>
-function nextPage(num){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById("page"+num).classList.add("active");
-}
-
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-  noBtn.style.top=Math.random()*80+"vh";
-  noBtn.style.left=Math.random()*80+"vw";
-});
-
-function celebrate(){
-  document.body.style.background="linear-gradient(135deg,#ff1e56,#ff9a9e)";
-  document.getElementById("msg").innerHTML="You just made me the happiest person alive 💖💋";
-}
-</script>
-
-</body>
-</html>
+function next(n
