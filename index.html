@@ -35,7 +35,7 @@
         }
         .action-btn {
             background: var(--hot-pink); color: white; border: none;
-            padding: 16px 45px; border-radius: 50px; font-size: 1.2rem; cursor: pointer;
+            padding: 16px 45px; border-radius: 50px; font-size: 1.1rem; cursor: pointer;
             box-shadow: 0 4px 15px rgba(255,148,148,0.3);
         }
         .opt-btn {
@@ -63,7 +63,7 @@
     <div class="container" id="main-ui">
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div class="polaroid">
-                <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Memory Photo">
+                <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Our Memory">
             </div>
             <div class="card">
                 <h1>Hi Chhaya ❤️</h1>
@@ -82,13 +82,21 @@
         let step = 0;
 
         const questions = [
-            { q: "What impression have I created on you?", opts: ["Mature 🌿", "Understanding 💡", "Emotional ❤️", "Smart 🧠"] },
+            { q: "What impression have I created on you over time?", opts: ["Mature 🌿", "Understanding 💡", "Emotional ❤️", "Neural 🧠"] },
             { q: "Write a cute nickname for me:", type: "text" },
-            { q: "Which habit of mine do you love?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
-            { q: "Favorite thing to do with me?", opts: ["Holding hands 🤝", "Looking in eyes 👀"] },
-            { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite ♾️"] },
+            { q: "Which habit of mine do you love most?", opts: ["The way I care ❤️", "The way I talk 🗣️"] },
+            { q: "What is my favorite thing to do with you?", opts: ["Holding hands 🤝", "Getting lost in your eyes 👀"] },
+            { q: "One thing I do that always makes you smile?", opts: ["Daily 'Good Morning' texts ☀️", "Teasing & annoying you 😜"] },
+            { q: "What do you feel most when you are with me?", opts: ["No fear of judgment 🕊️", "No fear of reaction 😌"] },
+            { q: "What is the hardest thing to understand about me?", opts: ["My silent moods 😶", "My overthinking mind 🧠"] },
+            { q: "But despite that, how do we make it work?", opts: ["Endless patience 🌊", "Always talking it out 🗣️❤️"] },
+            { q: "What can we improve together?", type: "text", label: "Write your thoughts..." },
+            { q: "My best quality according to you?", opts: ["Honesty & loyalty 🤝", "Making you feel safe ❤️"] },
+            { q: "What gives you the most confidence in 'us'?", opts: ["Handling differences 🤝", "Never giving up ⚓"] },
+            { q: "Rate our chemistry:", opts: ["8 🔥", "9 🔥", "10 🔥", "Infinite! ♾️"] },
+            { q: "Will you be my Valentine forever?", opts: ["Yes! Always ❤️", "Absolutely! 🥰"] },
             { q: "Relive one moment: Which memory would you go back to?", type: "text" },
-            { q: "Will you be my Valentine forever?", opts: ["Yes ❤️", "Absolutely 🥰"] }
+            { q: "Are you ready to see what's at the end?", opts: ["Yes, take me there ❤️"] }
         ];
 
         function toggleMusic() {
@@ -138,12 +146,12 @@
             const ui = document.getElementById('main-ui');
             if (step < questions.length) {
                 const q = questions[step];
-                ui.innerHTML = `<div class="card"><h1>Step ${step + 1}</h1><p style="color:#666">${q.q}</p><div id="box"></div></div>`;
+                ui.innerHTML = `<div class="card"><h1>Step ${step + 1}</h1><p style="color:#666; font-size: 0.9rem;">${q.q}</p><div id="box"></div></div>`;
                 const box = document.getElementById("box");
 
                 if (q.type === "text") {
                     box.innerHTML = `
-                        <input type="text" id="ans_input" placeholder="Type here...">
+                        <input type="text" id="ans_input" placeholder="${q.label || 'Type here...'}">
                         <br>
                         <button class="action-btn" onclick="validateAndSave()">Next</button>`;
                 } else {
@@ -162,6 +170,7 @@
             document.getElementById('main-ui').innerHTML = `
                 <div class="card">
                     <h1>Stay mine forever? ❤️</h1>
+                    <p>Will you stay grounded, understanding, and mine forever?</p>
                     <br><button class="action-btn" onclick="celebrate()">YES ❤️</button>
                 </div>`;
         }
@@ -176,10 +185,14 @@
             document.getElementById('main-ui').innerHTML = `
                 <div class="card">
                     <h1>I Love You! ❤️</h1>
+                    <p style="font-style: italic; color: #ff4d94; margin-bottom: 20px; font-size: 0.9rem;">
+                        "In a world full of temporary things, you are my forever. 
+                        Thank you for being my safe space and my favorite memory."
+                    </p>
                     <p>Click below to share your heart with me!</p>
                     <br>
                     <button class="action-btn" style="background:#25D366" id="final-wa-btn">
-                        Send on WhatsApp 📱
+                        Tell me on WhatsApp 📱
                     </button>
                 </div>`;
             
