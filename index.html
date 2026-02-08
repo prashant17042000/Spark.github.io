@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Chhaya ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -15,150 +15,112 @@
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-            color: white;
-            overflow: hidden;
-            height: 100%;
+            color: white; overflow: hidden; height: 100%;
+            touch-action: manipulation;
         }
 
-        /* Heart Progress Bar */
-        #progress-container {
-            position: fixed;
-            top: 20px;
-            width: 80%;
-            left: 10%;
-            height: 6px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            z-index: 100;
-            display: none;
-        }
-        #progress-bar {
-            height: 100%;
-            background: var(--pink);
-            width: 0%;
-            position: relative;
-            transition: width 0.5s ease;
-        }
-        #progress-heart { position: absolute; right: -10px; top: -8px; font-size: 20px; }
-
-        /* Background Floating Hearts */
         .heart-bg {
-            position: fixed;
-            bottom: -10%;
-            font-size: 24px;
-            z-index: 0;
-            animation: float 6s linear infinite;
+            position: fixed; bottom: -10%; font-size: 24px;
+            z-index: 0; animation: float 6s linear infinite;
         }
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Glassmorphism Card */
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 30px 20px;
-            width: 85%;
-            max-width: 400px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            z-index: 10;
+        .section {
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 20px; box-sizing: border-box;
         }
 
-        .section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px; padding: 30px 20px;
+            width: 85%; max-width: 400px; z-index: 10;
         }
 
         .hidden { display: none !important; }
 
-        /* Photo Styles */
         .photo-container {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 4px solid white;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 170px; height: 170px; border-radius: 50%;
+            border: 4px solid white; overflow: hidden;
+            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: pulse 2.5s infinite;
         }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         .photo-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; margin: 10px 0; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; margin: 10px 0; }
         
-        /* Buttons */
         .btn {
-            background: white;
-            color: var(--dark-pink);
-            border: none;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            margin: 10px auto;
-            width: 90%;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: block;
+            background: white; color: var(--dark-pink); border: none;
+            padding: 15px 25px; font-size: 1.1rem; border-radius: 50px;
+            font-weight: 600; margin: 10px auto; width: 90%;
+            cursor: pointer; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .btn:active { transform: scale(0.95); }
 
         #music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--glass);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 1000; border: 1px solid var(--glass-border);
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--glass); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; z-index: 1000; border: 1px solid var(--glass-border);
             cursor: pointer; font-size: 20px;
         }
 
-        #typewriter { font-size: 1.2rem; min-height: 3em; margin-bottom: 20px; font-weight: 600; }
-
-        /* Propose Day Logic */
-        .proposal-btns {
-            position: relative;
-            height: 120px;
-            margin-top: 20px;
+        input {
+            background: rgba(255,255,255,0.2); border: 2px solid white;
+            padding: 15px; border-radius: 15px; color: white;
+            width: 80%; margin-bottom: 20px; text-align: center; font-size: 1rem;
         }
-        #yes-btn { width: 120px; display: inline-block; }
-        #no-btn { width: 120px; display: inline-block; transition: 0.2s ease; }
 
+        #letter-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000; display: none;
+            align-items: center; justify-content: center;
+        }
+        .letter-content {
+            background: white; color: #333; padding: 30px;
+            border-radius: 20px; width: 80%; max-height: 70%; overflow-y: auto;
+            font-size: 1.1rem; line-height: 1.6;
+        }
+
+        #typewriter { font-size: 1.1rem; min-height: 3em; margin-bottom: 20px; font-weight: 600; }
+
+        .proposal-container {
+            display: flex; justify-content: center; gap: 10px;
+            margin-top: 20px; position: relative; width: 100%; min-height: 60px;
+        }
+        #no-btn { position: absolute; width: 100px; transition: 0.1s ease-out; z-index: 50; }
+        #yes-btn { width: 100px; z-index: 100; }
     </style>
 </head>
 <body>
-
-    <div id="progress-container">
-        <div id="progress-bar"><span id="progress-heart">❤️</span></div>
-    </div>
 
     <div id="music-toggle" onclick="toggleMusic()">🎵</div>
     <audio id="bg-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="page1" class="section">
+    <div id="auth" class="section">
+        <div class="glass-card">
+            <h2>Welcome ❤️</h2>
+            <p>Enter your name to unlock the magic</p>
+            <input type="text" id="pass-input" placeholder="Type 'Chhaya' here...">
+            <button class="btn" onclick="checkPass()">Unlock ✨</button>
+        </div>
+    </div>
+
+    <div id="page1" class="section hidden">
         <div class="photo-container">
             <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
         </div>
-        <h1>Hey Chhaya ❤️</h1>
+        <h1 id="greeting">Hey Chhaya ❤️</h1>
         <div id="typewriter"></div>
         <button class="btn" id="start-btn" style="display:none;" onclick="startJourney()">Yes, I'm ready! ✨</button>
     </div>
@@ -172,24 +134,33 @@
 
     <div id="final" class="section hidden">
         <div class="glass-card">
-            <h1>Chhaya... ❤️</h1>
-            <p>I want to make every moment of my life as beautiful as you are.</p>
+            <h1>My Dear Chhaya... ❤️</h1>
+            <p>Today is Propose Day, and I didn't want it to pass without telling you...</p>
             <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Will you be mine forever?</h2>
-            
-            <div class="proposal-btns">
+            <div class="proposal-container">
                 <button class="btn" id="yes-btn" onclick="accepted()">YES! 💍</button>
-                <button class="btn" id="no-btn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+                <button class="btn" id="no-btn" ontouchstart="moveNo()" onmousedown="moveNo()">No</button>
             </div>
         </div>
     </div>
 
     <div id="success" class="section hidden">
-        <h1 style="font-size: 3.5rem;">YES! ❤️🎉</h1>
-        <div class="photo-container" style="width: 140px; height: 140px; margin: 0 auto 20px;">
+        <h1 style="font-size: 3rem;">YES! ❤️🎉</h1>
+        <div class="photo-container">
             <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
         </div>
-        <p>This is the happiest day of my life!</p>
-        <button class="btn" onclick="share()">Share the news with me 📱</button>
+        <button class="btn" onclick="openLetter()">Read My Love Letter 💌</button>
+        <button class="btn" style="background:transparent; color:white; border:1px solid white;" onclick="share()">Send me your answer 📱</button>
+    </div>
+
+    <div id="letter-modal" onclick="closeLetter()">
+        <div class="letter-content" onclick="event.stopPropagation()">
+            <h3>My Dearest Chhaya,</h3>
+            <p>From the moment you entered my life, everything changed. Your smile makes my day brighter, and your heart makes me want to be a better man.</p>
+            <p>On this Propose Day, I promise to stand by you, to laugh with you, and to love you more with every passing second. You are my today and all of my tomorrows.</p>
+            <p>I love you forever. ❤️</p>
+            <button class="btn" onclick="closeLetter()">Close ❌</button>
+        </div>
     </div>
 
     <script>
@@ -197,15 +168,25 @@
         let currentStep = 0;
         const music = document.getElementById('bg-music');
 
-        const questions = [
-            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" },
-            { q: "What's our perfect date?", options: ["Candlelight Dinner 🕯️", "Cozy Movie Night 🍿"], key: "Date" },
-            { q: "Where should we travel first?", options: ["Mountains 🏔️", "Beach Side 🌊"], key: "Travel" },
-            { q: "Long drives or long walks?", options: ["Long Drives 🚗", "Long Walks 🚶‍♀️"], key: "Vibe" },
-            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry", type: "rating" }
-        ];
+        function checkPass() {
+            const val = document.getElementById('pass-input').value.toLowerCase();
+            if(val === "chhaya") {
+                document.getElementById('auth').classList.add('hidden');
+                document.getElementById('page1').classList.remove('hidden');
+                setGreeting();
+                type();
+            } else { alert("Hmm... try 'Chhaya' ❤️"); }
+        }
 
-        // Typewriter Effect
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let g = "Hey Chhaya ❤️";
+            if(hour < 12) g = "Good Morning, Chhaya ❤️";
+            else if(hour < 17) g = "Good Afternoon, Chhaya ❤️";
+            else g = "Good Evening, Chhaya ❤️";
+            document.getElementById('greeting').innerText = g;
+        }
+
         const introText = "I made something special from my heart... only for you. Are you ready?";
         let charIndex = 0;
         function type() {
@@ -213,93 +194,74 @@
                 document.getElementById("typewriter").innerHTML += introText.charAt(charIndex);
                 charIndex++;
                 setTimeout(type, 50);
-            } else {
-                document.getElementById('start-btn').style.display = "block";
-            }
+            } else { document.getElementById('start-btn').style.display = "block"; }
         }
-        window.onload = type;
 
-        function toggleMusic() {
-            music.paused ? music.play() : music.pause();
-        }
+        function toggleMusic() { music.paused ? music.play() : music.pause(); }
 
         function startJourney() {
             document.getElementById('page1').classList.add('hidden');
             document.getElementById('journey').classList.remove('hidden');
-            document.getElementById('progress-container').style.display = "block";
             showQuestion();
         }
+
+        const questions = [
+            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" },
+            { q: "What's our perfect date?", options: ["Candlelight Dinner 🕯️", "Cozy Movie Night 🍿"], key: "Date" },
+            { q: "Where should we travel first?", options: ["Mountains 🏔️", "Beach Side 🌊"], key: "Travel" },
+            { q: "Long drives or long walks?", options: ["Long Drives 🚗", "Long Walks 🚶‍♀️"], key: "Vibe" },
+            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry" }
+        ];
 
         function showQuestion() {
             if (currentStep >= questions.length) {
                 document.getElementById('journey').classList.add('hidden');
                 document.getElementById('final').classList.remove('hidden');
-                document.getElementById('progress-container').style.display = "none";
                 return;
             }
-
-            const prog = (currentStep / questions.length) * 100;
-            document.getElementById('progress-bar').style.width = prog + "%";
-
             const data = questions[currentStep];
             document.getElementById('question-text').innerText = data.q;
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = '';
-            
             data.options.forEach(opt => {
                 const b = document.createElement('button');
-                b.className = 'btn';
-                b.innerText = opt;
-                b.onclick = () => {
-                    responses[data.key] = opt;
-                    currentStep++;
-                    showQuestion();
-                };
+                b.className = 'btn'; b.innerText = opt;
+                b.onclick = () => { responses[data.key] = opt; currentStep++; showQuestion(); };
                 optionsDiv.appendChild(b);
             });
         }
 
         function moveNo() {
             const noBtn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 150);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 120);
+            noBtn.style.position = 'fixed'; noBtn.style.left = x + 'px'; noBtn.style.top = y + 'px';
         }
 
         function accepted() {
             document.getElementById('final').classList.add('hidden');
             document.getElementById('success').classList.remove('hidden');
-            
-            // Confetti
-            var end = Date.now() + (7 * 1000);
-            (function frame() {
-              confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffffff'] });
-              confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffffff'] });
-              if (Date.now() < end) requestAnimationFrame(frame);
-            }());
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4d6d', '#ffffff'] });
         }
+
+        function openLetter() { document.getElementById('letter-modal').style.display = "flex"; }
+        function closeLetter() { document.getElementById('letter-modal').style.display = "none"; }
 
         function share() {
             let text = "Hey! It's a YES Chhaya ❤️\n\n";
-            for (const [key, value] of Object.entries(responses)) {
-                text += `*${key}*: ${value}\n`;
-            }
-            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-            window.open(url);
+            for (const [key, value] of Object.entries(responses)) { text += `• ${key}: ${value}\n`; }
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
         }
 
-        // BG Hearts
         setInterval(() => {
             const h = document.createElement('div');
             h.classList.add('heart-bg');
             h.innerText = ['❤️', '💖', '✨'][Math.floor(Math.random() * 3)];
             h.style.left = Math.random() * 100 + "vw";
-            h.style.animationDuration = (Math.random() * 2 + 4) + "s";
             document.body.appendChild(h);
             setTimeout(() => h.remove(), 6000);
         }, 600);
     </script>
 </body>
-</html>
+        </html>
+        
