@@ -1,187 +1,250 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Chhaya ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Chhaya ❤️</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --light-pink: #fff0f3;
+            --dark-pink: #c9184a;
+            --soft-glow: rgba(255, 77, 109, 0.3);
+        }
 
-<style>
-body{
- margin:0;
- font-family:'Segoe UI',sans-serif;
- text-align:center;
- background:linear-gradient(135deg,#ff4d6d,#ff8fa3,#ffc2d1);
- color:white;
- overflow-x:hidden;
- overflow-y:auto;
-}
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-pink);
+            color: var(--dark-pink);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-.page{
- display:none;
- min-height:100vh;
- padding:60px 20px 80px;
- width:100%;
-}
-.active{display:block}
+        /* Background Animations */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
 
-h1{font-size:12vw;margin:20px}
-h2{font-size:7vw;margin:20px}
+        .heart {
+            position: fixed;
+            bottom: -10%;
+            font-size: 24px;
+            user-select: none;
+            z-index: 0;
+            animation: float 6s linear infinite;
+        }
 
-button{
- padding:18px 28px;
- font-size:6vw;
- border:none;
- border-radius:40px;
- background:white;
- color:#ff4d6d;
- margin:8px;
- cursor:pointer;
-}
+        /* Pulsing Photo Effect */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 var(--soft-glow); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(255, 77, 109, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
 
-/* PHOTO */
-img{
- width:60vw;
- max-width:260px;
- border-radius:50%;
- box-shadow:0 0 25px white;
-}
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
 
-/* floating hearts + flowers */
-.heart,.flower{
- position:fixed;
- animation:float 7s linear infinite;
-}
-@keyframes float{
-0%{transform:translateY(100vh);opacity:0}
-50%{opacity:1}
-100%{transform:translateY(-10vh);opacity:0}
-}
-</style>
+        .hidden { display: none; }
+
+        .photo-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid white;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: pulse 2.5s infinite;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 { font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.05); }
+        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 35px; padding: 0 10px; }
+
+        .btn {
+            background-color: var(--pink);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            width: 85%;
+            max-width: 320px;
+        }
+
+        .btn:active { transform: scale(0.92); }
+
+        .question-box {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1);
+            width: 90%;
+            max-width: 420px;
+        }
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .rating-btn {
+            background: white;
+            border: 2px solid var(--pink);
+            color: var(--pink);
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: none;
+            width: auto;
+        }
+
+        .rating-btn:active {
+            background: var(--pink);
+            color: white;
+        }
+    </style>
 </head>
-
 <body>
 
-<script>
-for(let i=0;i<50;i++){
- let h=document.createElement("div");
- h.className="heart"; h.innerHTML="❤️";
- h.style.left=Math.random()*100+"vw";
- document.body.appendChild(h);
-}
-for(let i=0;i<35;i++){
- let f=document.createElement("div");
- f.className="flower"; f.innerHTML="🌸";
- f.style.left=Math.random()*100+"vw";
- document.body.appendChild(f);
-}
-</script>
+    <div id="garden"></div>
 
-<div id="p1" class="page active">
-<img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png">
-<h1>Hey Chhaya ❤️</h1>
-<h2>I made something special from my heart… only for you. Are you ready?</h2>
-<button onclick="next(2)">Open 💖</button>
-</div>
+    <div id="page1" class="section">
+        <div class="photo-container">
+            <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
+        </div>
+        <h1>Hey Chhaya ❤️</h1>
+        <p>I made something special from my heart… <br><b>only for you.</b> Are you ready?</p>
+        <button class="btn" onclick="nextPage()">Yes, I'm ready! ✨</button>
+    </div>
 
-<div id="p2" class="page">
-<h1>Will you be my Valentine?</h1>
-<button onclick="answer('Valentine','Yes 😍',3)">Yes 😍</button>
-<button onclick="answer('Valentine','Obviously 💕',3)">Obviously 💕</button>
-</div>
+    <div id="journey" class="section hidden">
+        <div class="question-box">
+            <h2 id="question-text">Question here?</h2>
+            <div id="options"></div>
+        </div>
+    </div>
 
-<div id="p3" class="page">
-<h1>Would you like to go on cute dates with me?</h1>
-<button onclick="answer('Dates','Yes 😍',4)">Yes 😍</button>
-<button onclick="answer('Dates','Definitely ❤️',4)">Definitely ❤️</button>
-</div>
+    <div id="final" class="section hidden">
+        <h1 style="font-size: 3.2rem;">I LOVE YOU <br>CHHAYA ❤️</h1>
+        <p>You've made me the happiest person. <br>Will you share your answers with me?</p>
+        <button class="btn" onclick="shareAnswers()">Share via WhatsApp/Menu 📱</button>
+        <button class="btn" style="background: transparent; color: var(--pink); box-shadow: none; margin-top: 20px;" onclick="location.reload()">Replay 🔄</button>
+    </div>
 
-<div id="p4" class="page">
-<h1>Do you see a future with me?</h1>
-<button onclick="answer('Future','Yes 💖',5)">Yes 💖</button>
-<button onclick="answer('Future','Of course 💍',5)">Of course 💍</button>
-</div>
+    <script>
+        const responses = {};
+        let currentStep = 0;
 
-<div id="p5" class="page">
-<h1>Would you travel with me someday?</h1>
-<button onclick="answer('Travel','Yes ✈️',6)">Yes ✈️</button>
-<button onclick="answer('Travel','Everywhere 🌍',6)">Everywhere 🌍</button>
-</div>
+        const questions = [
+            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" },
+            { q: "What's our perfect date?", options: ["Candlelight Dinner 🕯️", "Cozy Movie Night 🍿"], key: "Date" },
+            { q: "How do you see our future?", options: ["Full of Adventures 🌍", "Peaceful & Loving 🏡"], key: "Future" },
+            { q: "Where should we travel first?", options: ["Mountains 🏔️", "Beach Side 🌊"], key: "Travel" },
+            { q: "What surprise do you like more?", options: ["Handwritten Letters 📝", "Unexpected Gifts 🎁"], key: "Surprise" },
+            { q: "Long drives or long walks?", options: ["Long Drives 🚗", "Long Walks 🚶‍♀️"], key: "Vibe" },
+            { q: "Being together forever?", options: ["Pinky Promise! 🤙", "No Doubts! ❤️"], key: "Forever" },
+            { q: "Rate how much you like me:", options: ["7", "8", "9", "10"], key: "Like Level", type: "rating" },
+            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry", type: "rating" },
+            { q: "How excited are you for us?", options: ["7", "8", "9", "10"], key: "Excitement", type: "rating" }
+        ];
 
-<div id="p6" class="page">
-<h1>Would you like surprise gifts?</h1>
-<button onclick="answer('Gifts','Yes 🎁',7)">Yes 🎁</button>
-<button onclick="answer('Gifts','Love them 💕',7)">Love them 💕</button>
-</div>
+        function createHeart() {
+            const icons = ['❤️', '🌸', '✨', '💖', '🌷'];
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.getElementById('garden').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
 
-<div id="p7" class="page">
-<h1>Would you like long drives together?</h1>
-<button onclick="answer('Drives','Yes 🚗',8)">Yes 🚗</button>
-<button onclick="answer('Drives','Always 😍',8)">Always 😍</button>
-</div>
+        function nextPage() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('journey').classList.remove('hidden');
+            showQuestion();
+        }
 
-<div id="p8" class="page">
-<h1>Can we create memories forever?</h1>
-<button onclick="answer('Memories','Yes 📸',9)">Yes 📸</button>
-<button onclick="answer('Memories','Forever 💖',9)">Forever 💖</button>
-</div>
+        function showQuestion() {
+            if (currentStep >= questions.length) {
+                showFinal();
+                return;
+            }
 
-<div id="p9" class="page">
-<h1>Will you be mine forever?</h1>
-<button onclick="answer('Forever','Yes 💍',10)">Yes 💍</button>
-<button onclick="answer('Forever','Always ❤️',10)">Always ❤️</button>
-</div>
+            const data = questions[currentStep];
+            document.getElementById('question-text').innerText = data.q;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            if (data.type === 'rating') {
+                optionsDiv.classList.add('rating-grid');
+            } else {
+                optionsDiv.classList.remove('rating-grid');
+            }
 
-<div id="p10" class="page">
-<h1>Rate how much you like me 😄</h1>
-<button onclick="answer('Like','7',11)">7</button>
-<button onclick="answer('Like','8',11)">8</button>
-<button onclick="answer('Like','9',11)">9</button>
-<button onclick="answer('Like','10',11)">10 ❤️</button>
-</div>
+            data.options.forEach(opt => {
+                const b = document.createElement('button');
+                b.className = data.type === 'rating' ? 'btn rating-btn' : 'btn';
+                b.innerText = opt;
+                b.onclick = () => {
+                    responses[data.key] = opt;
+                    currentStep++;
+                    showQuestion();
+                };
+                optionsDiv.appendChild(b);
+            });
+        }
 
-<div id="p11" class="page">
-<h1>Rate our chemistry 💕</h1>
-<button onclick="answer('Chemistry','7',12)">7</button>
-<button onclick="answer('Chemistry','8',12)">8</button>
-<button onclick="answer('Chemistry','9',12)">9</button>
-<button onclick="answer('Chemistry','10',12)">10 ❤️</button>
-</div>
+        function showFinal() {
+            document.getElementById('journey').classList.add('hidden');
+            document.getElementById('final').classList.remove('hidden');
+        }
 
-<div id="p12" class="page">
-<h1>Rate how excited you are for us 😍</h1>
-<button onclick="answer('Excitement','7',13)">7</button>
-<button onclick="answer('Excitement','8',13)">8</button>
-<button onclick="answer('Excitement','9',13)">9</button>
-<button onclick="answer('Excitement','10',13)">10 ❤️</button>
-</div>
+        function shareAnswers() {
+            let text = "Hey! I just finished your surprise website Chhaya ❤️\n\n";
+            for (const [key, value] of Object.entries(responses)) {
+                text += `*${key}*: ${value}\n`;
+            }
 
-<div id="p13" class="page">
-<h1>I LOVE YOU CHHAYA ❤️</h1>
-<button onclick="shareResults()">Share Answers 💌</button>
-<br><br>
-<button onclick="replay()">Replay 🔁</button>
-</div>
-
-<script>
-function answer(q,c,nextPage){
- let data=JSON.parse(localStorage.getItem("answers")||"[]");
- data.push(q+" : "+c);
- localStorage.setItem("answers",JSON.stringify(data));
- next(nextPage);
-}
-function next(n){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById("p"+n).classList.add("active");
-}
-function shareResults(){
- let data=JSON.parse(localStorage.getItem("answers")||[]);
- let text="My answers 💖\n\n"+data.join("\n");
- navigator.share({title:"Answers",text:text});
-}
-function replay(){
- localStorage.clear();
- location.reload();
-}
-</script>
-
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Journey with You',
+                    text: text
+                }).catch(() => {
+                    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+                });
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+            }
+        }
+    </script>
 </body>
 </html>
