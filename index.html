@@ -11,7 +11,6 @@
             --pink: #ff4d6d;
             --dark-pink: #c9184a;
             --glass: rgba(255, 255, 255, 0.2);
-            --glass-border: rgba(255, 255, 255, 0.4);
         }
 
         body, html {
@@ -40,7 +39,7 @@
         .glass-card {
             background: var(--glass); backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255,255,255,0.4);
             border-radius: 30px; padding: 30px 20px;
             width: 90%; max-width: 400px; z-index: 10;
         }
@@ -51,9 +50,7 @@
             width: 160px; height: 160px; border-radius: 50%;
             border: 4px solid white; overflow: hidden;
             margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: pulse 2.5s infinite;
         }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         .photo-container img { width: 100%; height: 100%; object-fit: cover; }
 
         h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; margin: 10px 0; }
@@ -71,33 +68,29 @@
             width: 85%; margin-bottom: 15px; text-align: center; font-size: 1.1rem;
         }
 
-        #typewriter { font-size: 1.1rem; min-height: 3em; margin-bottom: 20px; font-weight: 600; }
-
-        /* Fixed Proposal Layout */
-        .proposal-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
-            width: 100%;
-            min-height: 200px;
+        /* Anti-Overlap Proposal Layout */
+        .proposal-area {
             position: relative;
+            width: 100%;
+            height: 300px; /* Large space to prevent overlapping */
+            margin-top: 20px;
         }
         
-        #yes-btn { width: 120px; position: relative; }
-        #no-btn { 
-            width: 100px; 
+        #yes-btn { 
             position: absolute; 
-            transition: 0.1s ease;
-            right: 15%;
+            top: 20%; left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 150px;
+            z-index: 100;
         }
-
-        .letter-content {
-            background: white; color: #333; padding: 25px;
-            border-radius: 20px; text-align: left; font-size: 1rem; line-height: 1.5;
-            margin-top: 20px;
+        
+        #no-btn { 
+            position: absolute; 
+            bottom: 10%; left: 50%; 
+            transform: translateX(-50%);
+            width: 100px; 
+            transition: 0.1s ease;
+            z-index: 50;
         }
     </style>
 </head>
@@ -109,9 +102,9 @@
 
     <div id="auth" class="section">
         <div class="glass-card">
-            <h2>Our Memory ❤️</h2>
-            <p>Enter the date of our first proposal to unlock</p>
-            <input type="text" id="pass-input" placeholder="Type here...">
+            <h2>Unlock Our Memory ❤️</h2>
+            <p>Enter our special date to see your surprise...</p>
+            <input type="text" id="pass-input" placeholder="Enter date here...">
             <button class="btn" onclick="checkPass()">Unlock ✨</button>
         </div>
     </div>
@@ -120,8 +113,8 @@
         <div class="photo-container">
             <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
         </div>
-        <h1 id="greeting">Hey Chhaya ❤️</h1>
-        <div id="typewriter"></div>
+        <h1>Hey Chhaya ❤️</h1>
+        <p id="typewriter"></p>
         <button class="btn" id="start-btn" style="display:none;" onclick="startJourney()">I'm ready! ✨</button>
     </div>
 
@@ -136,7 +129,7 @@
         <div class="glass-card">
             <h1>My Dear Chhaya... ❤️</h1>
             <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Will you be mine forever?</h2>
-            <div class="proposal-container">
+            <div class="proposal-area">
                 <button class="btn" id="yes-btn" onclick="accepted()">YES! 💍</button>
                 <button class="btn" id="no-btn" ontouchstart="moveNo()" onmouseover="moveNo()">No</button>
             </div>
@@ -148,10 +141,7 @@
         <div class="photo-container">
             <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
         </div>
-        <div class="letter-content">
-            <p><b>My Dearest Chhaya,</b><br>
-            You are the best thing that ever happened to me. I promise to cherish every moment we share. Happy Propose Day! ❤️</p>
-        </div>
+        <p>I am the luckiest person in the world! ❤️</p>
         <button class="btn" onclick="share()">Send me the news! 📱</button>
     </div>
 
@@ -166,38 +156,31 @@
                 document.getElementById('auth').classList.add('hidden');
                 document.getElementById('page1').classList.remove('hidden');
                 music.play();
-                setGreeting();
                 type();
-            } else { alert("Try again... think of our special day! ❤️"); }
+            } else { alert("Incorrect! Think about our special day... ❤️"); }
         }
 
-        function setGreeting() {
-            const hour = new Date().getHours();
-            let g = "Hey Chhaya ❤️";
-            if(hour < 12) g = "Good Morning, Chhaya ❤️";
-            else if(hour < 17) g = "Good Afternoon, Chhaya ❤️";
-            else g = "Good Evening, Chhaya ❤️";
-            document.getElementById('greeting').innerText = g;
-        }
-
-        const introText = "I made something special from my heart... only for you. Are you ready?";
-        let charIndex = 0;
         function type() {
-            if (charIndex < introText.length) {
-                document.getElementById("typewriter").innerHTML += introText.charAt(charIndex);
-                charIndex++;
-                setTimeout(type, 50);
-            } else { document.getElementById('start-btn').style.display = "block"; }
+            const text = "I made something special from my heart... only for you. Are you ready?";
+            let i = 0;
+            const interval = setInterval(() => {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    document.getElementById('start-btn').style.display = "block";
+                }
+            }, 50);
         }
 
         const questions = [
             { q: "What was your first impression of me?", options: ["Sweet & Kind 😊", "Mysterious & Charming ✨"], key: "Impression" },
             { q: "Write a cute nickname for me:", type: "input", key: "Nickname" },
             { q: "Which habit of mine do you love most?", options: ["The way I care ❤️", "The way I talk 🗣️"], key: "Favorite Habit" },
-            { q: "What is my favorite thing to do with you?", options: ["Long Conversations 💬", "Exploring Places 🌍"], key: "My Favorite Activity" },
-            { q: "How many kids do you think we will have? 😉", options: ["Two! 🧒👧", "Secret! 🤐"], key: "Future Kids" },
-            { q: "If you could change one thing about me, what would it be?", options: ["Nothing, you're perfect! 🥰", "Maybe being less shy? 🤭"], key: "Change Request" },
-            { q: "Rate my chemistry with you:", options: ["8", "9", "10", "Infinite! 🔥"], key: "Our Chemistry" },
+            { q: "What is my favorite thing to do with you?", options: ["Long Conversations 💬", "Exploring Places 🌍"], key: "Favorite Activity" },
+            { q: "Where do you see us in 5 years?", options: ["Building a home 🏡", "Traveling the world ✈️"], key: "Future" },
+            { q: "What's my best quality according to you?", options: ["Loyalty 🤝", "Sense of humor 😂"], key: "Best Quality" },
+            { q: "Rate our chemistry:", options: ["8", "9", "10", "Infinite! 🔥"], key: "Chemistry" },
             { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" }
         ];
 
@@ -221,7 +204,7 @@
                 nextBtn.onclick = () => {
                     const val = document.getElementById('nick-input').value.trim();
                     if(val !== "") { responses[data.key] = val; currentStep++; showQuestion(); }
-                    else { alert("Write something sweet! ❤️"); }
+                    else { alert("Please write a nickname! ❤️"); }
                 };
                 optionsDiv.appendChild(nextBtn);
             } else {
@@ -236,8 +219,8 @@
 
         function moveNo() {
             const noBtn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - 120);
-            const y = Math.random() * (window.innerHeight - 150);
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
@@ -252,11 +235,11 @@
         function accepted() {
             document.getElementById('final').classList.add('hidden');
             document.getElementById('success').classList.remove('hidden');
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4d6d', '#ffffff'] });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
 
         function share() {
-            let text = "It's a YES Chhaya ❤️\n\nI answered your quiz:\n";
+            let text = "YES! I want to be yours forever Chhaya ❤️\n\nMy Answers:\n";
             for (const [key, value] of Object.entries(responses)) { text += `• ${key}: ${value}\n`; }
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
         }
