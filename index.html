@@ -18,7 +18,7 @@
         .container { display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px }
         .card {
             background: white; padding: 30px 25px; border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(255,77,148,0.2);
+            box-shadow: 0 20px 60px rgba(255, 77, 148, 0.2);
             max-width: 360px; width: 100%; text-align: center;
         }
         .polaroid {
@@ -35,7 +35,7 @@
         }
         .action-btn {
             background: var(--hot-pink); color: white; border: none;
-            padding: 14px 40px; border-radius: 50px; font-size: 1.1rem; cursor: pointer;
+            padding: 16px 45px; border-radius: 50px; font-size: 1.2rem; cursor: pointer;
             box-shadow: 0 4px 15px rgba(255,148,148,0.3);
         }
         .opt-btn {
@@ -61,11 +61,16 @@
     </audio>
 
     <div class="container" id="main-ui">
-        <div class="card">
-            <h1>Hi Chhaya ❤️</h1>
-            <p>I made something special for you.</p>
-            <br>
-            <button class="action-btn" onclick="showLock()">Open ✨</button>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="polaroid">
+                <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Memory Photo">
+            </div>
+            <div class="card">
+                <h1>Hi Chhaya ❤️</h1>
+                <p>I made something special for you.</p>
+                <br>
+                <button class="action-btn" onclick="showLock()">Open ✨</button>
+            </div>
         </div>
     </div>
 
@@ -93,19 +98,13 @@
         }
 
         function showLock() {
-            // Unmute permission for browsers
-            music.play().then(() => music.pause()).catch(e => console.log("Audio ready"));
+            music.play().then(() => music.pause()).catch(e => console.log("Init"));
             document.getElementById('main-ui').innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="polaroid">
-                        <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Memory Photo">
-                    </div>
-                    <div class="card">
-                        <h1>Unlock ❤️</h1>
-                        <p>Enter our special date (15 Jan 2025)</p>
-                        <input type="date" id="date-input">
-                        <br><button class="action-btn" onclick="unlock()">Unlock</button>
-                    </div>
+                <div class="card">
+                    <h1>Unlock ❤️</h1>
+                    <p>Enter our special date...</p>
+                    <input type="date" id="date-input">
+                    <br><button class="action-btn" onclick="unlock()">Unlock</button>
                 </div>`;
         }
 
@@ -116,7 +115,7 @@
                     musicBtn.style.display = "block";
                 });
                 showNext();
-            } else { alert("Try again, love... ❤️"); }
+            } else { alert("Not that date, love... try again ❤️"); }
         }
 
         function validateAndSave() {
@@ -176,7 +175,7 @@
 
             document.getElementById('main-ui').innerHTML = `
                 <div class="card">
-                    <h1>I Love You ❤️</h1>
+                    <h1>I Love You! ❤️</h1>
                     <p>Click below to share your heart with me!</p>
                     <br>
                     <button class="action-btn" style="background:#25D366" id="final-wa-btn">
