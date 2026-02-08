@@ -42,13 +42,13 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             border-radius: 30px; padding: 30px 20px;
-            width: 85%; max-width: 400px; z-index: 10;
+            width: 90%; max-width: 400px; z-index: 10;
         }
 
         .hidden { display: none !important; }
 
         .photo-container {
-            width: 170px; height: 170px; border-radius: 50%;
+            width: 160px; height: 160px; border-radius: 50%;
             border: 4px solid white; overflow: hidden;
             margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             animation: pulse 2.5s infinite;
@@ -65,33 +65,34 @@
             cursor: pointer; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        #music-toggle {
-            position: fixed; bottom: 20px; right: 20px;
-            background: var(--glass); width: 50px; height: 50px;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; z-index: 1000; border: 1px solid var(--glass-border);
-            cursor: pointer; font-size: 20px;
-        }
-
         input {
             background: rgba(255,255,255,0.2); border: 2px solid white;
             padding: 15px; border-radius: 15px; color: white;
-            width: 85%; margin-bottom: 5px; text-align: center; font-size: 1rem;
+            width: 85%; margin-bottom: 15px; text-align: center; font-size: 1.1rem;
         }
-        input::placeholder { color: rgba(255,255,255,0.7); }
-
-        .date-hint { font-size: 0.8rem; margin-bottom: 20px; color: rgba(255,255,255,0.9); }
 
         #typewriter { font-size: 1.1rem; min-height: 3em; margin-bottom: 20px; font-weight: 600; }
 
+        /* Fixed Proposal Layout */
         .proposal-container {
-            display: flex; justify-content: center; gap: 10px;
-            margin-top: 20px; position: relative; width: 100%; min-height: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+            min-height: 200px;
+            position: relative;
         }
         
-        /* The trick for the 'No' button */
-        #no-btn { position: absolute; width: 100px; transition: 0.15s ease; z-index: 50; }
-        #yes-btn { width: 100px; z-index: 100; }
+        #yes-btn { width: 120px; position: relative; }
+        #no-btn { 
+            width: 100px; 
+            position: absolute; 
+            transition: 0.1s ease;
+            right: 15%;
+        }
 
         .letter-content {
             background: white; color: #333; padding: 25px;
@@ -102,7 +103,6 @@
 </head>
 <body>
 
-    <div id="music-toggle" onclick="toggleMusic()">🎵</div>
     <audio id="bg-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
@@ -110,9 +110,8 @@
     <div id="auth" class="section">
         <div class="glass-card">
             <h2>Our Memory ❤️</h2>
-            <p>Enter the date of our first proposal to unlock the magic</p>
-            <input type="text" id="pass-input" placeholder="Example: 01 Jan 2024">
-            <div class="date-hint">Format: 15 Jan 2025</div>
+            <p>Enter the date of our first proposal to unlock</p>
+            <input type="text" id="pass-input" placeholder="Type here...">
             <button class="btn" onclick="checkPass()">Unlock ✨</button>
         </div>
     </div>
@@ -139,7 +138,7 @@
             <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem;">Will you be mine forever?</h2>
             <div class="proposal-container">
                 <button class="btn" id="yes-btn" onclick="accepted()">YES! 💍</button>
-                <button class="btn" id="no-btn" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
+                <button class="btn" id="no-btn" ontouchstart="moveNo()" onmouseover="moveNo()">No</button>
             </div>
         </div>
     </div>
@@ -151,7 +150,7 @@
         </div>
         <div class="letter-content">
             <p><b>My Dearest Chhaya,</b><br>
-            You are my today and all of my tomorrows. I promise to love you more with every passing second. Happy Propose Day! ❤️</p>
+            You are the best thing that ever happened to me. I promise to cherish every moment we share. Happy Propose Day! ❤️</p>
         </div>
         <button class="btn" onclick="share()">Send me the news! 📱</button>
     </div>
@@ -161,17 +160,15 @@
         let currentStep = 0;
         const music = document.getElementById('bg-music');
 
-        // Logic for Date Unlocker
         function checkPass() {
             const val = document.getElementById('pass-input').value.trim().toLowerCase();
             if(val === "15 jan 2025") {
                 document.getElementById('auth').classList.add('hidden');
                 document.getElementById('page1').classList.remove('hidden');
+                music.play();
                 setGreeting();
                 type();
-            } else { 
-                alert("Incorrect date. Please try again! ❤️"); 
-            }
+            } else { alert("Try again... think of our special day! ❤️"); }
         }
 
         function setGreeting() {
@@ -193,19 +190,15 @@
             } else { document.getElementById('start-btn').style.display = "block"; }
         }
 
-        function toggleMusic() { music.paused ? music.play() : music.pause(); }
-
-        function startJourney() {
-            document.getElementById('page1').classList.add('hidden');
-            document.getElementById('journey').classList.remove('hidden');
-            showQuestion();
-        }
-
         const questions = [
             { q: "What was your first impression of me?", options: ["Sweet & Kind 😊", "Mysterious & Charming ✨"], key: "Impression" },
             { q: "Write a cute nickname for me:", type: "input", key: "Nickname" },
-            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" },
-            { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry" }
+            { q: "Which habit of mine do you love most?", options: ["The way I care ❤️", "The way I talk 🗣️"], key: "Favorite Habit" },
+            { q: "What is my favorite thing to do with you?", options: ["Long Conversations 💬", "Exploring Places 🌍"], key: "My Favorite Activity" },
+            { q: "How many kids do you think we will have? 😉", options: ["Two! 🧒👧", "Secret! 🤐"], key: "Future Kids" },
+            { q: "If you could change one thing about me, what would it be?", options: ["Nothing, you're perfect! 🥰", "Maybe being less shy? 🤭"], key: "Change Request" },
+            { q: "Rate my chemistry with you:", options: ["8", "9", "10", "Infinite! 🔥"], key: "Our Chemistry" },
+            { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" }
         ];
 
         function showQuestion() {
@@ -228,7 +221,7 @@
                 nextBtn.onclick = () => {
                     const val = document.getElementById('nick-input').value.trim();
                     if(val !== "") { responses[data.key] = val; currentStep++; showQuestion(); }
-                    else { alert("Please write something sweet! ❤️"); }
+                    else { alert("Write something sweet! ❤️"); }
                 };
                 optionsDiv.appendChild(nextBtn);
             } else {
@@ -241,7 +234,6 @@
             }
         }
 
-        // SLIDING NO BUTTON LOGIC
         function moveNo() {
             const noBtn = document.getElementById('no-btn');
             const x = Math.random() * (window.innerWidth - 120);
@@ -251,6 +243,12 @@
             noBtn.style.top = y + 'px';
         }
 
+        function startJourney() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('journey').classList.remove('hidden');
+            showQuestion();
+        }
+
         function accepted() {
             document.getElementById('final').classList.add('hidden');
             document.getElementById('success').classList.remove('hidden');
@@ -258,7 +256,7 @@
         }
 
         function share() {
-            let text = "Hey! It's a YES Chhaya ❤️\n\nI answered your quiz:\n";
+            let text = "It's a YES Chhaya ❤️\n\nI answered your quiz:\n";
             for (const [key, value] of Object.entries(responses)) { text += `• ${key}: ${value}\n`; }
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
         }
