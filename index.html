@@ -26,32 +26,22 @@ h1{font-size:12vw;margin:20px}
 h2{font-size:8vw;margin:20px}
 
 button{
- padding:22px 45px;
- font-size:7vw;
+ padding:18px 28px;
+ font-size:6vw;
  border:none;
  border-radius:40px;
  background:white;
  color:#ff4d6d;
- margin:15px;
+ margin:8px;
  cursor:pointer;
 }
 
-img{
- width:60vw;
- max-width:260px;
- border-radius:50%;
- box-shadow:0 0 25px white;
-}
-
-/* hearts + flowers */
-.heart,.flower{
- position:fixed;
- animation:float 7s linear infinite;
-}
+/* floating hearts + flowers */
+.heart,.flower{position:fixed;animation:float 7s linear infinite}
 @keyframes float{
- 0%{transform:translateY(100vh);opacity:0}
- 50%{opacity:1}
- 100%{transform:translateY(-10vh);opacity:0}
+0%{transform:translateY(100vh);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
 }
 </style>
 </head>
@@ -61,96 +51,110 @@ img{
 <script>
 for(let i=0;i<50;i++){
  let h=document.createElement("div");
- h.className="heart";
- h.innerHTML="❤️";
+ h.className="heart"; h.innerHTML="❤️";
  h.style.left=Math.random()*100+"vw";
- h.style.fontSize="22px";
  document.body.appendChild(h);
 }
 for(let i=0;i<35;i++){
  let f=document.createElement("div");
- f.className="flower";
- f.innerHTML="🌸";
+ f.className="flower"; f.innerHTML="🌸";
  f.style.left=Math.random()*100+"vw";
- f.style.fontSize="24px";
  document.body.appendChild(f);
 }
 </script>
 
 <div id="p1" class="page active">
-<img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png">
 <h1>Hey Chhaya ❤️</h1>
-<h2>This is only for you 💌</h2>
 <button onclick="next(2)">Open 💖</button>
 </div>
 
 <div id="p2" class="page">
-<h1>Will you be my Valentine? ❤️</h1>
+<h1>Will you be my Valentine?</h1>
 <button onclick="answer('Valentine','Yes 😍',3)">Yes 😍</button>
 <button onclick="answer('Valentine','Obviously 💕',3)">Obviously 💕</button>
 </div>
 
 <div id="p3" class="page">
-<h1>Hey my dear Chhaya 💕</h1>
-<h2>Would you like to go on dates with me?</h2>
-<button onclick="answer('Dates','Yes 😍',4)">Yes 😍</button>
-<button onclick="answer('Dates','Definitely ❤️',4)">Definitely ❤️</button>
+<h1>Rate how much you like me 😄</h1>
+<button onclick="answer('Like level','7',4)">7</button>
+<button onclick="answer('Like level','8',4)">8</button>
+<button onclick="answer('Like level','9',4)">9</button>
+<button onclick="answer('Like level','10',4)">10 ❤️</button>
 </div>
 
 <div id="p4" class="page">
-<h1>Hey my dear Chhaya 🌸</h1>
-<h2>Do you see a future with me?</h2>
-<button onclick="answer('Future','Yes 💖',5)">Yes 💖</button>
-<button onclick="answer('Future','Of course 💍',5)">Of course 💍</button>
+<h1>Rate our future together 💍</h1>
+<button onclick="answer('Future rating','7',5)">7</button>
+<button onclick="answer('Future rating','8',5)">8</button>
+<button onclick="answer('Future rating','9',5)">9</button>
+<button onclick="answer('Future rating','10',5)">10 ❤️</button>
 </div>
 
 <div id="p5" class="page">
-<h1>Hey my dear Chhaya 💞</h1>
-<h2>Would you travel with me someday?</h2>
-<button onclick="answer('Travel','Yes ✈️',6)">Yes ✈️</button>
-<button onclick="answer('Travel','Everywhere 🌍',6)">Everywhere 🌍</button>
+<h1>Rate how cute we are 😍</h1>
+<button onclick="answer('Cuteness','7',6)">7</button>
+<button onclick="answer('Cuteness','8',6)">8</button>
+<button onclick="answer('Cuteness','9',6)">9</button>
+<button onclick="answer('Cuteness','10',6)">10 ❤️</button>
 </div>
 
 <div id="p6" class="page">
-<h1>Hey my dear Chhaya 🌼</h1>
-<h2>Would you like surprise gifts?</h2>
-<button onclick="answer('Gifts','Yes 🎁',7)">Yes 🎁</button>
-<button onclick="answer('Gifts','Love them 💕',7)">Love them 💕</button>
+<h1>Rate date excitement 🍕</h1>
+<button onclick="answer('Dates','7',7)">7</button>
+<button onclick="answer('Dates','8',7)">8</button>
+<button onclick="answer('Dates','9',7)">9</button>
+<button onclick="answer('Dates','10',7)">10 ❤️</button>
 </div>
 
 <div id="p7" class="page">
-<h1>Hey my dear Chhaya 💗</h1>
-<h2>Would you like long drives together?</h2>
-<button onclick="answer('Drives','Yes 🚗',8)">Yes 🚗</button>
-<button onclick="answer('Drives','Always 😍',8)">Always 😍</button>
+<h1>Rate travel dreams ✈️</h1>
+<button onclick="answer('Travel','7',8)">7</button>
+<button onclick="answer('Travel','8',8)">8</button>
+<button onclick="answer('Travel','9',8)">9</button>
+<button onclick="answer('Travel','10',8)">10 ❤️</button>
 </div>
 
 <div id="p8" class="page">
-<h1>Hey my dear Chhaya 💓</h1>
-<h2>Can we create memories forever?</h2>
-<button onclick="answer('Memories','Yes 📸',9)">Yes 📸</button>
-<button onclick="answer('Memories','Forever 💖',9)">Forever 💖</button>
+<h1>Rate forever together 💕</h1>
+<button onclick="answer('Forever','7',9)">7</button>
+<button onclick="answer('Forever','8',9)">8</button>
+<button onclick="answer('Forever','9',9)">9</button>
+<button onclick="answer('Forever','10',9)">10 ❤️</button>
 </div>
 
 <div id="p9" class="page">
-<h1>Hey my dear Chhaya 💘</h1>
-<h2>Will you be mine forever?</h2>
-<button onclick="answer('Forever','Yes 💍',10)">Yes 💍</button>
-<button onclick="answer('Forever','Always ❤️',10)">Always ❤️</button>
+<h1>Rate how much you enjoy talking to me 💬</h1>
+<button onclick="answer('Talking','7',10)">7</button>
+<button onclick="answer('Talking','8',10)">8</button>
+<button onclick="answer('Talking','9',10)">9</button>
+<button onclick="answer('Talking','10',10)">10 ❤️</button>
 </div>
 
 <div id="p10" class="page">
+<h1>Rate our chemistry 💕</h1>
+<button onclick="answer('Chemistry','7',11)">7</button>
+<button onclick="answer('Chemistry','8',11)">8</button>
+<button onclick="answer('Chemistry','9',11)">9</button>
+<button onclick="answer('Chemistry','10',11)">10 ❤️</button>
+</div>
+
+<div id="p11" class="page">
+<h1>Rate how excited you are for us 😍</h1>
+<button onclick="answer('Excitement','7',12)">7</button>
+<button onclick="answer('Excitement','8',12)">8</button>
+<button onclick="answer('Excitement','9',12)">9</button>
+<button onclick="answer('Excitement','10',12)">10 ❤️</button>
+</div>
+
+<div id="p12" class="page">
 <h1>I LOVE YOU CHHAYA ❤️</h1>
-<h2>You just made my day 💖</h2>
-<button onclick="shareResults()">Share your answers 💌</button>
-<br>
+<h2>Share your answers 💌</h2>
+<button onclick="shareResults()">Share Answers</button>
+<br><br>
 <button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
-const animations=["fadeOut","slideOut","zoomOut","rotateOut","flipOut"];
-
-/* save answers */
 function answer(q,c,nextPage){
  let data=JSON.parse(localStorage.getItem("answers")||"[]");
  data.push(q+" : "+c);
@@ -158,30 +162,17 @@ function answer(q,c,nextPage){
  next(nextPage);
 }
 
-/* page transition */
 function next(n){
- let current=document.querySelector(".active");
- let anim=animations[Math.floor(Math.random()*animations.length)];
- current.classList.add(anim);
- setTimeout(()=>{
-  current.classList.remove("active",anim);
-  document.getElementById("p"+n).classList.add("active");
- },600);
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById("p"+n).classList.add("active");
 }
 
-/* share answers */
 function shareResults(){
  let data=JSON.parse(localStorage.getItem("answers")||[]);
  let text="My answers 💖\n\n"+data.join("\n");
-
- if(navigator.share){
-   navigator.share({title:"For You ❤️",text:text});
- }else{
-   alert(text);
- }
+ navigator.share({title:"Answers",text:text});
 }
 
-/* replay */
 function replay(){
  localStorage.clear();
  location.reload();
@@ -189,4 +180,4 @@ function replay(){
 </script>
 
 </body>
-                                                                 </html>
+</html>
