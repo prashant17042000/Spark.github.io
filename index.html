@@ -124,11 +124,11 @@
 
         let step = 0;
         let playing = false;
-        let userAnswers = [];
+        let userAnswers = []; 
         const music = document.getElementById('bg-music');
 
         function showLock() {
-            music.play().then(() => { music.pause(); }).catch(e => console.log("Audio ready"));
+            music.play().then(() => { music.pause(); }).catch(e => console.log("Init"));
             document.getElementById('main-ui').innerHTML = `
                 <div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s ease;">
                     <div class="polaroid">
@@ -138,17 +138,16 @@
                         <h1>Unlock</h1>
                         <p>Enter our special date (15 Jan 2025)...</p>
                         <input type="date" id="date-input">
-                        <br><button class="action-btn" onclick="unlock()">Enter My Heart</button>
+                        <br><button class="action-btn" onclick="unlock()">Open My Heart</button>
                     </div>
                 </div>`;
         }
 
         function unlock() {
             if (document.getElementById('date-input').value === '2025-01-15') {
-                music.play().then(() => {
-                    playing = true;
-                    document.getElementById('music-btn').style.display = 'flex';
-                });
+                music.play();
+                playing = true;
+                document.getElementById('music-btn').style.display = 'flex';
                 showNext();
             } else { alert("Try again, love... ❤️"); }
         }
@@ -171,8 +170,10 @@
             }
         }
 
+        // IMPROVED SAVE LOGIC
         function saveAndNext(answer) {
-            userAnswers.push({question: questions[step].q, answer: answer});
+            if (answer === "" || !answer) answer = "No answer";
+            userAnswers.push({q: questions[step].q, a: answer});
             step++;
             showNext();
         }
@@ -185,14 +186,19 @@
                 typeWriter(q.q, 0, () => {
                     const box = document.getElementById('options-box');
                     if (q.type === "text") {
-                        box.innerHTML = `<input type="text" id="ans" placeholder="Type here..."><br><button class="action-btn" onclick="saveAndNext(document.getElementById('ans').value)">Next</button>`;
+                        box.innerHTML = `
+                            <input type="text" id="ans_field" placeholder="Type here...">
+                            <br>
+                            <button class="action-btn" onclick="saveAndNext(document.getElementById('ans_field').value)">Next</button>`;
                     } else {
                         let btns = ``;
                         q.opts.forEach(o => btns += `<button class="opt-btn" onclick="saveAndNext('${o}')">${o}</button>`);
                         box.innerHTML = btns;
                     }
                 });
-            } else { proposal(); }
+            } else { 
+                proposal(); 
+            }
         }
 
         function proposal() {
@@ -209,22 +215,28 @@
         }
 
         function celebrate() {
-            let finalMessage = "I said YES! ❤️\n\nMy Responses:\n";
+            // FORMATTING ALL ANSWERS INTO THE MESSAGE
+            let summary = "I SAID YES! ❤️\n\n--- My Journey ---\n";
             userAnswers.forEach((item, index) => {
-                finalMessage += `${index + 1}. ${item.question}: ${item.answer}\n`;
+                summary += `${index + 1}. ${item.q}\n   Ans: ${item.a}\n\n`;
             });
-            
+            summary += "Forever Yours. ❤️";
+
             document.getElementById('main-ui').innerHTML = `
                 <div class="card">
                     <h1>I Love You! ❤️</h1>
-                    <p>Forever starts now.</p>
+                    <p>Forever starts now. Click below to share your journey with me!</p>
                     <br>
-                    <button class="action-btn" style="background:#25D366" onclick="window.open('https://wa.me/?text=${encodeURIComponent(finalMessage)}')">WhatsApp My Answers 📱</button>
+                    <button class="action-btn" style="background:#25D366" onclick="sendToWhatsApp('${encodeURIComponent(summary)}')">Share All Answers 📱</button>
                 </div>`;
             setInterval(createHeart, 150);
         }
 
-        // --- Animations ---
+        function sendToWhatsApp(msg) {
+            window.open(`https://wa.me/?text=${msg}`);
+        }
+
+        // --- Visuals ---
         const canvas = document.getElementById('petal-canvas'); const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         const petals = [];
