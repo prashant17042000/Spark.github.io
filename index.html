@@ -19,15 +19,9 @@ body{
  padding:20px;
 }
 
-.page{
- display:none;
- width:100%;
- max-width:700px;
-}
-
+.page{display:none;width:100%;max-width:700px}
 .active{display:block}
 
-/* BIG TEXT */
 h1{font-size:12vw;margin:20px}
 h2{font-size:8vw;margin:20px}
 
@@ -42,7 +36,6 @@ button{
  cursor:pointer;
 }
 
-/* IMAGE */
 img{
  width:60vw;
  max-width:260px;
@@ -50,7 +43,7 @@ img{
  box-shadow:0 0 25px white;
 }
 
-/* HEARTS + FLOWERS */
+/* hearts + flowers */
 .heart,.flower{
  position:fixed;
  animation:float 7s linear infinite;
@@ -60,22 +53,6 @@ img{
  50%{opacity:1}
  100%{transform:translateY(-10vh);opacity:0}
 }
-
-/* ANIMATIONS */
-.fadeOut{animation:fadeOut .6s forwards}
-@keyframes fadeOut{to{opacity:0}}
-
-.slideOut{animation:slideOut .6s forwards}
-@keyframes slideOut{to{transform:translateX(-100vw);opacity:0}}
-
-.zoomOut{animation:zoomOut .6s forwards}
-@keyframes zoomOut{to{transform:scale(0);opacity:0}}
-
-.rotateOut{animation:rotateOut .6s forwards}
-@keyframes rotateOut{to{transform:rotate(360deg) scale(0);opacity:0}}
-
-.flipOut{animation:flipOut .6s forwards}
-@keyframes flipOut{to{transform:rotateY(90deg);opacity:0}}
 </style>
 </head>
 
@@ -90,7 +67,6 @@ for(let i=0;i<50;i++){
  h.style.fontSize="22px";
  document.body.appendChild(h);
 }
-
 for(let i=0;i<35;i++){
  let f=document.createElement("div");
  f.className="flower";
@@ -104,41 +80,85 @@ for(let i=0;i<35;i++){
 <div id="p1" class="page active">
 <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png">
 <h1>Hey Chhaya ❤️</h1>
+<h2>This is only for you 💌</h2>
 <button onclick="next(2)">Open 💖</button>
 </div>
 
-<div id="p2" class="page"><h1>Will you be my Valentine? ❤️</h1>
-<button onclick="next(3)">Yes 😍</button><button onclick="next(3)">Obviously 💕</button></div>
+<div id="p2" class="page">
+<h1>Will you be my Valentine? ❤️</h1>
+<button onclick="answer('Valentine','Yes 😍',3)">Yes 😍</button>
+<button onclick="answer('Valentine','Obviously 💕',3)">Obviously 💕</button>
+</div>
 
-<div id="p3" class="page"><h1>Hey my dear Chhaya 💕 Do you like spending time with me?</h1>
-<button onclick="next(4)">Yes 😘</button><button onclick="next(4)">Very much ❤️</button></div>
+<div id="p3" class="page">
+<h1>Hey my dear Chhaya 💕</h1>
+<h2>Would you like to go on dates with me?</h2>
+<button onclick="answer('Dates','Yes 😍',4)">Yes 😍</button>
+<button onclick="answer('Dates','Definitely ❤️',4)">Definitely ❤️</button>
+</div>
 
-<div id="p4" class="page"><h1>Hey my dear Chhaya 🌸 Do I make you smile?</h1>
-<button onclick="next(5)">Always 😊</button><button onclick="next(5)">Everyday 💖</button></div>
+<div id="p4" class="page">
+<h1>Hey my dear Chhaya 🌸</h1>
+<h2>Do you see a future with me?</h2>
+<button onclick="answer('Future','Yes 💖',5)">Yes 💖</button>
+<button onclick="answer('Future','Of course 💍',5)">Of course 💍</button>
+</div>
 
-<div id="p5" class="page"><h1>Hey my dear Chhaya 💞 Do you miss me?</h1>
-<button onclick="next(6)">Yes 🥺</button><button onclick="next(6)">All the time 💕</button></div>
+<div id="p5" class="page">
+<h1>Hey my dear Chhaya 💞</h1>
+<h2>Would you travel with me someday?</h2>
+<button onclick="answer('Travel','Yes ✈️',6)">Yes ✈️</button>
+<button onclick="answer('Travel','Everywhere 🌍',6)">Everywhere 🌍</button>
+</div>
 
-<div id="p6" class="page"><h1>Hey my dear Chhaya 🌼 Do you love our chats?</h1>
-<button onclick="next(7)">So much 💬</button><button onclick="next(7)">Always ❤️</button></div>
+<div id="p6" class="page">
+<h1>Hey my dear Chhaya 🌼</h1>
+<h2>Would you like surprise gifts?</h2>
+<button onclick="answer('Gifts','Yes 🎁',7)">Yes 🎁</button>
+<button onclick="answer('Gifts','Love them 💕',7)">Love them 💕</button>
+</div>
 
-<div id="p7" class="page"><h1>Hey my dear Chhaya 💗 Will you go on dates with me?</h1>
-<button onclick="next(8)">Yes 😍</button><button onclick="next(8)">Of course 💖</button></div>
+<div id="p7" class="page">
+<h1>Hey my dear Chhaya 💗</h1>
+<h2>Would you like long drives together?</h2>
+<button onclick="answer('Drives','Yes 🚗',8)">Yes 🚗</button>
+<button onclick="answer('Drives','Always 😍',8)">Always 😍</button>
+</div>
 
-<div id="p8" class="page"><h1>Hey my dear Chhaya 💓 Can we make memories together?</h1>
-<button onclick="next(9)">Yes 📸</button><button onclick="next(9)">Forever 💕</button></div>
+<div id="p8" class="page">
+<h1>Hey my dear Chhaya 💓</h1>
+<h2>Can we create memories forever?</h2>
+<button onclick="answer('Memories','Yes 📸',9)">Yes 📸</button>
+<button onclick="answer('Memories','Forever 💖',9)">Forever 💖</button>
+</div>
 
-<div id="p9" class="page"><h1>Hey my dear Chhaya 💘 Will you hold my hand forever?</h1>
-<button onclick="next(10)">Yes 🤝</button><button onclick="next(10)">Always 💍</button></div>
+<div id="p9" class="page">
+<h1>Hey my dear Chhaya 💘</h1>
+<h2>Will you be mine forever?</h2>
+<button onclick="answer('Forever','Yes 💍',10)">Yes 💍</button>
+<button onclick="answer('Forever','Always ❤️',10)">Always ❤️</button>
+</div>
 
 <div id="p10" class="page">
 <h1>I LOVE YOU CHHAYA ❤️</h1>
-<button onclick="location.reload()">Replay 🔁</button>
+<h2>You just made my day 💖</h2>
+<button onclick="shareResults()">Share your answers 💌</button>
+<br>
+<button onclick="replay()">Replay 🔁</button>
 </div>
 
 <script>
 const animations=["fadeOut","slideOut","zoomOut","rotateOut","flipOut"];
 
+/* save answers */
+function answer(q,c,nextPage){
+ let data=JSON.parse(localStorage.getItem("answers")||"[]");
+ data.push(q+" : "+c);
+ localStorage.setItem("answers",JSON.stringify(data));
+ next(nextPage);
+}
+
+/* page transition */
 function next(n){
  let current=document.querySelector(".active");
  let anim=animations[Math.floor(Math.random()*animations.length)];
@@ -148,7 +168,25 @@ function next(n){
   document.getElementById("p"+n).classList.add("active");
  },600);
 }
+
+/* share answers */
+function shareResults(){
+ let data=JSON.parse(localStorage.getItem("answers")||[]);
+ let text="My answers 💖\n\n"+data.join("\n");
+
+ if(navigator.share){
+   navigator.share({title:"For You ❤️",text:text});
+ }else{
+   alert(text);
+ }
+}
+
+/* replay */
+function replay(){
+ localStorage.clear();
+ location.reload();
+}
 </script>
 
 </body>
-</html>
+                                                                 </html>
