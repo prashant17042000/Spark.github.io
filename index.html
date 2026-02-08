@@ -4,44 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Chhaya ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --pink: #ff4d6d;
-            --light-pink: #fff0f3;
             --dark-pink: #c9184a;
-            --soft-glow: rgba(255, 77, 109, 0.3);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--light-pink);
-            color: var(--dark-pink);
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            color: white;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            height: 100%;
         }
 
-        /* Background Animations */
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        /* Heart Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 20px;
+            width: 80%;
+            left: 10%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            z-index: 100;
+            display: none;
+        }
+        #progress-bar {
+            height: 100%;
+            background: var(--pink);
+            width: 0%;
+            position: relative;
+            transition: width 0.5s ease;
+        }
+        #progress-heart {
+            position: absolute;
+            right: -10px;
+            top: -8px;
+            font-size: 18px;
         }
 
+        /* Floating Elements */
         .heart {
             position: fixed;
             bottom: -10%;
             font-size: 24px;
-            user-select: none;
             z-index: 0;
             animation: float 6s linear infinite;
+            opacity: 0.8;
         }
 
-        /* Pulsing Photo Effect */
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 var(--soft-glow); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(255, 77, 109, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
         .section {
@@ -53,143 +88,135 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            position: relative;
-            z-index: 1;
         }
 
         .hidden { display: none; }
 
+        /* Photo & Animations */
         .photo-container {
-            width: 220px;
-            height: 220px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 6px solid white;
+            border: 4px solid white;
             overflow: hidden;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            animation: pulse 2.5s infinite;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
+        .photo-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        h1 { font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.05); }
-        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 35px; padding: 0 10px; }
-
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; margin: 10px 0; }
+        
+        /* Buttons */
         .btn {
-            background-color: var(--pink);
-            color: white;
+            background: white;
+            color: var(--dark-pink);
             border: none;
-            padding: 18px 40px;
-            font-size: 1.2rem;
+            padding: 15px 30px;
+            font-size: 1.1rem;
             border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
             margin: 10px;
             width: 85%;
-            max-width: 320px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:active { transform: scale(0.95); }
+        .rating-btn { padding: 20px; font-size: 1.3rem; }
+
+        /* Music Toggle */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
         }
 
-        .btn:active { transform: scale(0.92); }
+        /* Typewriter text */
+        #typewriter { font-size: 1.2rem; min-height: 3em; margin-bottom: 20px; }
 
-        .question-box {
-            background: white;
-            padding: 35px 25px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1);
-            width: 90%;
-            max-width: 420px;
-        }
-
-        .rating-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .rating-btn {
-            background: white;
-            border: 2px solid var(--pink);
-            color: var(--pink);
-            padding: 20px;
-            border-radius: 20px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            box-shadow: none;
-            width: auto;
-        }
-
-        .rating-btn:active {
-            background: var(--pink);
-            color: white;
-        }
     </style>
 </head>
 <body>
 
-    <div id="garden"></div>
+    <div id="progress-container">
+        <div id="progress-bar"><span id="progress-heart">❤️</span></div>
+    </div>
+
+    <div id="music-toggle" onclick="toggleMusic()">🎵</div>
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="page1" class="section">
         <div class="photo-container">
             <img src="https://i.postimg.cc/TYT2ShyR/file-000000009e0c7209a10ff9e4ded428dd-(1).png" alt="Chhaya">
         </div>
         <h1>Hey Chhaya ❤️</h1>
-        <p>I made something special from my heart… <br><b>only for you.</b> Are you ready?</p>
-        <button class="btn" onclick="nextPage()">Yes, I'm ready! ✨</button>
+        <div id="typewriter"></div>
+        <button class="btn" id="start-btn" style="display:none;" onclick="startJourney()">Yes, I'm ready! ✨</button>
     </div>
 
     <div id="journey" class="section hidden">
-        <div class="question-box">
-            <h2 id="question-text">Question here?</h2>
+        <div class="glass-card">
+            <h2 id="question-text" style="font-size: 1.5rem; margin-bottom: 25px;"></h2>
             <div id="options"></div>
         </div>
     </div>
 
     <div id="final" class="section hidden">
-        <h1 style="font-size: 3.2rem;">I LOVE YOU <br>CHHAYA ❤️</h1>
-        <p>You've made me the happiest person. <br>Will you share your answers with me?</p>
-        <button class="btn" onclick="shareAnswers()">Share via WhatsApp/Menu 📱</button>
-        <button class="btn" style="background: transparent; color: var(--pink); box-shadow: none; margin-top: 20px;" onclick="location.reload()">Replay 🔄</button>
+        <h1 style="font-size: 3.5rem;">I LOVE YOU <br>CHHAYA ❤️</h1>
+        <p style="font-size: 1.2rem;">My heart is yours forever.</p>
+        <button class="btn" onclick="shareAnswers()">Share our memories 📱</button>
+        <button class="btn" style="background: transparent; color: white; border: 1px solid white;" onclick="location.reload()">Replay 🔄</button>
     </div>
 
     <script>
         const responses = {};
         let currentStep = 0;
+        const music = document.getElementById('bg-music');
 
         const questions = [
             { q: "Will you be my Valentine forever?", options: ["Yes! Always ❤️", "Absolutely! 🥰"], key: "Valentine" },
             { q: "What's our perfect date?", options: ["Candlelight Dinner 🕯️", "Cozy Movie Night 🍿"], key: "Date" },
-            { q: "How do you see our future?", options: ["Full of Adventures 🌍", "Peaceful & Loving 🏡"], key: "Future" },
             { q: "Where should we travel first?", options: ["Mountains 🏔️", "Beach Side 🌊"], key: "Travel" },
-            { q: "What surprise do you like more?", options: ["Handwritten Letters 📝", "Unexpected Gifts 🎁"], key: "Surprise" },
             { q: "Long drives or long walks?", options: ["Long Drives 🚗", "Long Walks 🚶‍♀️"], key: "Vibe" },
-            { q: "Being together forever?", options: ["Pinky Promise! 🤙", "No Doubts! ❤️"], key: "Forever" },
-            { q: "Rate how much you like me:", options: ["7", "8", "9", "10"], key: "Like Level", type: "rating" },
+            { q: "Rate how much you like me:", options: ["7", "8", "9", "10"], key: "Like", type: "rating" },
             { q: "Rate our chemistry:", options: ["7", "8", "9", "10"], key: "Chemistry", type: "rating" },
-            { q: "How excited are you for us?", options: ["7", "8", "9", "10"], key: "Excitement", type: "rating" }
+            { q: "Excitement level for us?", options: ["7", "8", "9", "10"], key: "Excitement", type: "rating" }
         ];
 
-        function createHeart() {
-            const icons = ['❤️', '🌸', '✨', '💖', '🌷'];
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-            document.getElementById('garden').appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+        // Typewriter Effect
+        const introText = "I made something special from my heart... only for you. Are you ready?";
+        let i = 0;
+        function typeWriter() {
+            if (i < introText.length) {
+                document.getElementById("typewriter").innerHTML += introText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            } else {
+                document.getElementById('start-btn').style.display = "block";
+            }
         }
-        setInterval(createHeart, 400);
+        window.onload = typeWriter;
 
-        function nextPage() {
+        function toggleMusic() {
+            return music.paused ? music.play() : music.pause();
+        }
+
+        function startJourney() {
             document.getElementById('page1').classList.add('hidden');
             document.getElementById('journey').classList.remove('hidden');
+            document.getElementById('progress-container').style.display = "block";
             showQuestion();
         }
 
@@ -199,20 +226,27 @@
                 return;
             }
 
+            // Update Progress Bar
+            const prog = (currentStep / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = prog + "%";
+
             const data = questions[currentStep];
             document.getElementById('question-text').innerText = data.q;
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = '';
             
             if (data.type === 'rating') {
-                optionsDiv.classList.add('rating-grid');
+                optionsDiv.style.display = "grid";
+                optionsDiv.style.gridTemplateColumns = "1fr 1fr";
+                optionsDiv.style.gap = "10px";
             } else {
-                optionsDiv.classList.remove('rating-grid');
+                optionsDiv.style.display = "block";
             }
 
             data.options.forEach(opt => {
                 const b = document.createElement('button');
-                b.className = data.type === 'rating' ? 'btn rating-btn' : 'btn';
+                b.className = 'btn';
+                if(data.type === 'rating') b.classList.add('rating-btn');
                 b.innerText = opt;
                 b.onclick = () => {
                     responses[data.key] = opt;
@@ -226,6 +260,17 @@
         function showFinal() {
             document.getElementById('journey').classList.add('hidden');
             document.getElementById('final').classList.remove('hidden');
+            document.getElementById('progress-container').style.display = "none";
+            
+            // Confetti Burst
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+              confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffffff'] });
+              confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffffff'] });
+              if (Date.now() < end) requestAnimationFrame(frame);
+            }());
         }
 
         function shareAnswers() {
@@ -233,18 +278,25 @@
             for (const [key, value] of Object.entries(responses)) {
                 text += `*${key}*: ${value}\n`;
             }
-
             if (navigator.share) {
-                navigator.share({
-                    title: 'My Journey with You',
-                    text: text
-                }).catch(() => {
-                    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
-                });
+                navigator.share({ title: 'My Heart for You', text: text });
             } else {
                 window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
             }
         }
+
+        // Floating Hearts Logic
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = ['❤️', '💖', '✨', '🌸'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 4) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
     </script>
 </body>
-</html>
+    </html>
+    
